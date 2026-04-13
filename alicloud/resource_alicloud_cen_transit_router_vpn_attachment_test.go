@@ -41,12 +41,7 @@ func TestAccAlicloudCENTransitRouterVpnAttachment_basic0(t *testing.T) {
 		Steps: []resource.TestStep{
 			{
 				Config: testAccConfig(map[string]interface{}{
-					"vpn_owner_id": "${data.alicloud_account.default.id}",
-					"zone": []map[string]interface{}{
-						{
-							"zone_id": "${data.alicloud_cen_transit_router_available_resources.default.resources.0.master_zones.0}",
-						},
-					},
+					"vpn_owner_id":                          "${data.alicloud_account.default.id}",
 					"transit_router_attachment_name":        "${var.name}",
 					"auto_publish_route_enabled":            "false",
 					"transit_router_attachment_description": "${var.name}",
@@ -57,7 +52,6 @@ func TestAccAlicloudCENTransitRouterVpnAttachment_basic0(t *testing.T) {
 				Check: resource.ComposeTestCheckFunc(
 					testAccCheck(map[string]string{
 						"vpn_owner_id":                          CHECKSET,
-						"zone.#":                                "1",
 						"transit_router_attachment_name":        name,
 						"auto_publish_route_enabled":            "false",
 						"transit_router_attachment_description": name,
@@ -105,52 +99,65 @@ func AlicloudCENTransitRouterVpnAttachmentBasicDependence0(name string) string {
 	}
 
 	resource "alicloud_vpn_customer_gateway" "default" {
-  		name        = "${var.name}"
-  		ip_address  = "42.104.22.212"
-  		asn         = "45014"
-  		description = "testAccVpnConnectionDesc"
+  		customer_gateway_name = var.name
+  		ip_address            = "42.104.22.${100 + tonumber(substr(var.name, -2, 2)) %% 20}"
+  		asn                   = "45014"
+  		description           = "testAccVpnConnectionDesc"
 	}
 
 	resource "alicloud_vpn_gateway_vpn_attachment" "default" {
-  		customer_gateway_id = alicloud_vpn_customer_gateway.default.id
   		network_type        = "public"
   		local_subnet        = "0.0.0.0/0"
   		remote_subnet       = "0.0.0.0/0"
   		effect_immediately  = false
-  		ike_config {
-    		ike_auth_alg = "md5"
-    		ike_enc_alg  = "des"
-    		ike_version  = "ikev2"
-    		ike_mode     = "main"
-    		ike_lifetime = 86400
-    		psk          = "tf-testvpn2"
-    		ike_pfs      = "group1"
-    		remote_id    = "testbob2"
-    		local_id     = "testalice2"
-  		}
-
-  		ipsec_config {
-    		ipsec_pfs      = "group5"
-    		ipsec_enc_alg  = "des"
-			ipsec_auth_alg = "md5"
-    		ipsec_lifetime = 86400
-  		}
-		bgp_config {
-			enable       = true
-    		local_asn    = 45014
-    		tunnel_cidr  = "169.254.11.0/30"
-    		local_bgp_ip = "169.254.11.1"
-  		}
-  		health_check_config {
-    		enable   = true
-    		sip      = "192.168.1.1"
-    		dip      = "10.0.0.1"
-    		interval = 10
-    		retry    = 10
-    		policy   = "revoke_route"
-  		}
-  		enable_dpd           = true
-  		enable_nat_traversal = true
+	tunnel_options_specification {
+		customer_gateway_id = alicloud_vpn_customer_gateway.default.id
+		role                = "master"
+		tunnel_index        = 2
+			enable_dpd          = true
+			enable_nat_traversal = true
+			tunnel_ike_config {
+				ike_auth_alg = "md5"
+				ike_enc_alg  = "des"
+				ike_version  = "ikev2"
+				ike_mode     = "main"
+				ike_lifetime = 86400
+				psk          = "tf-testvpn2"
+				ike_pfs      = "group1"
+				remote_id    = "testbob2"
+				local_id     = "testalice2"
+			}
+			tunnel_ipsec_config {
+				ipsec_pfs      = "group5"
+				ipsec_enc_alg  = "des"
+				ipsec_auth_alg = "md5"
+				ipsec_lifetime = 86400
+			}
+		}
+	tunnel_options_specification {
+		customer_gateway_id = alicloud_vpn_customer_gateway.default.id
+		role                = "master"
+		tunnel_index        = 1
+			enable_dpd          = true
+			enable_nat_traversal = true
+			tunnel_ike_config {
+				ike_auth_alg = "md5"
+				ike_enc_alg  = "des"
+				ike_version  = "ikev2"
+				ike_mode     = "main"
+				ike_lifetime = 86400
+				psk          = "tf-testvpn3"
+				ike_pfs      = "group1"
+				remote_id    = "testbob3"
+				local_id     = "testalice3"
+			}
+			tunnel_ipsec_config {
+				ipsec_pfs      = "group5"
+				ipsec_enc_alg  = "des"
+				ipsec_auth_alg = "md5"
+				ipsec_lifetime = 86400
+			}
+		}
   		vpn_attachment_name  = var.name
 	}
 
@@ -190,11 +197,6 @@ func TestAccAlicloudCENTransitRouterVpnAttachment_basic1(t *testing.T) {
 		Steps: []resource.TestStep{
 			{
 				Config: testAccConfig(map[string]interface{}{
-					"zone": []map[string]interface{}{
-						{
-							"zone_id": "${data.alicloud_cen_transit_router_available_resources.default.resources.0.master_zones.0}",
-						},
-					},
 					"transit_router_id": "${alicloud_cen_transit_router_cidr.default.transit_router_id}",
 					"vpn_id":            "${alicloud_vpn_gateway_vpn_attachment.default.id}",
 					"tags": map[string]string{
@@ -204,7 +206,6 @@ func TestAccAlicloudCENTransitRouterVpnAttachment_basic1(t *testing.T) {
 				}),
 				Check: resource.ComposeTestCheckFunc(
 					testAccCheck(map[string]string{
-						"zone.#":            "1",
 						"vpn_id":            CHECKSET,
 						"transit_router_id": CHECKSET,
 						"tags.%":            "2",
@@ -699,8 +700,8 @@ resource "alicloud_cen_transit_router_cidr" "defaultuUtyCv" {
 }
 
 resource "alicloud_vpn_customer_gateway" "defaultMeoCIz" {
-  ip_address            = "0.0.0.0"
-  customer_gateway_name = "test-vpn-attachment"
+  ip_address            = "42.104.22.${210 + tonumber(substr(var.name, -2, 2)) %% 20}"
+  customer_gateway_name = var.name
   depends_on            = ["alicloud_cen_transit_router_cidr.defaultuUtyCv"]
 }
 
@@ -715,9 +716,10 @@ resource "alicloud_vpn_gateway_vpn_attachment" "defaultvrPzdh" {
   vpn_attachment_name = var.name
   tunnel_options_specification {
     customer_gateway_id = alicloud_vpn_customer_gateway.defaultMeoCIz.id
+    role = "master"
     enable_dpd = "true"
     enable_nat_traversal = "true"
-    tunnel_index = "1"
+    tunnel_index = "2"
 
     tunnel_ike_config {
       remote_id = "2.2.2.2"
@@ -740,8 +742,9 @@ resource "alicloud_vpn_gateway_vpn_attachment" "defaultvrPzdh" {
     
   }
   tunnel_options_specification {
+    role = "master"
     enable_nat_traversal = "true"
-    tunnel_index = "2"
+    tunnel_index = "1"
       tunnel_ike_config {
       local_id = "4.4.4.4"
       remote_id = "5.5.5.5"
@@ -801,13 +804,8 @@ func TestAccAliCloudCenTransitRouterVpnAttachment_basic10409(t *testing.T) {
 					"transit_router_id":                     "${alicloud_cen_transit_router_cidr.defaultuUtyCv.transit_router_id}",
 					"vpn_id":                                "${alicloud_vpn_gateway_vpn_attachment.defaultvrPzdh.id}",
 					"auto_publish_route_enabled":            "false",
-					"zone": []map[string]interface{}{
-						{
-							"zone_id": "eu-central-1a",
-						},
-					},
-					"charge_type":                    "POSTPAY",
-					"transit_router_attachment_name": "test-vpn-attachment",
+					"charge_type":                           "POSTPAY",
+					"transit_router_attachment_name":        "test-vpn-attachment",
 				}),
 				Check: resource.ComposeTestCheckFunc(
 					testAccCheck(map[string]string{
@@ -817,7 +815,6 @@ func TestAccAliCloudCenTransitRouterVpnAttachment_basic10409(t *testing.T) {
 						"transit_router_id":                     CHECKSET,
 						"vpn_id":                                CHECKSET,
 						"auto_publish_route_enabled":            "false",
-						"zone.#":                                "1",
 						"charge_type":                           "POSTPAY",
 						"transit_router_attachment_name":        "test-vpn-attachment",
 					}),
@@ -924,15 +921,64 @@ resource "alicloud_cen_transit_router_cidr" "defaultuUtyCv" {
 }
 
 resource "alicloud_vpn_customer_gateway" "defaultMeoCIz" {
-  ip_address            = "0.0.0.0"
-  customer_gateway_name = "test-vpn-attachment"
+  ip_address            = "43.104.22.${230 + tonumber(substr(var.name, -2, 2)) %% 20}"
+  customer_gateway_name = var.name
 }
 
 resource "alicloud_vpn_gateway_vpn_attachment" "defaultvrPzdh" {
-  customer_gateway_id = alicloud_vpn_customer_gateway.defaultMeoCIz.id
-  vpn_attachment_name = "test-vpn-attachment"
-  local_subnet        = "10.0.1.0/24"
-  remote_subnet       = "10.0.2.0/24"
+  network_type        = "public"
+  local_subnet        = "0.0.0.0/0"
+  remote_subnet       = "0.0.0.0/0"
+  enable_tunnels_bgp  = false
+  vpn_attachment_name = var.name
+  tunnel_options_specification {
+    customer_gateway_id  = alicloud_vpn_customer_gateway.defaultMeoCIz.id
+    role                 = "master"
+    enable_dpd           = true
+    enable_nat_traversal = true
+    tunnel_index         = 1
+    tunnel_ike_config {
+      ike_auth_alg = "md5"
+      ike_enc_alg  = "aes"
+      ike_version  = "ikev2"
+      ike_mode     = "main"
+      ike_lifetime = 86400
+      psk          = "tf-testvpn10409-1"
+      ike_pfs      = "group2"
+      remote_id    = "testbob-10409-1"
+      local_id     = "testalice-10409-1"
+    }
+    tunnel_ipsec_config {
+      ipsec_pfs      = "group5"
+      ipsec_enc_alg  = "aes"
+      ipsec_auth_alg = "md5"
+      ipsec_lifetime = 86400
+    }
+  }
+  tunnel_options_specification {
+    customer_gateway_id  = alicloud_vpn_customer_gateway.defaultMeoCIz.id
+    role                 = "master"
+    enable_dpd           = true
+    enable_nat_traversal = true
+    tunnel_index         = 2
+    tunnel_ike_config {
+      ike_auth_alg = "md5"
+      ike_enc_alg  = "aes"
+      ike_version  = "ikev2"
+      ike_mode     = "main"
+      ike_lifetime = 86400
+      psk          = "tf-testvpn10409-2"
+      ike_pfs      = "group2"
+      remote_id    = "testbob-10409-2"
+      local_id     = "testalice-10409-2"
+    }
+    tunnel_ipsec_config {
+      ipsec_pfs      = "group5"
+      ipsec_enc_alg  = "aes"
+      ipsec_auth_alg = "md5"
+      ipsec_lifetime = 86400
+    }
+  }
 }
 
 

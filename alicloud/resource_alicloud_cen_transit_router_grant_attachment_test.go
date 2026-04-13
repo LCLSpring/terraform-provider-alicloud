@@ -2,7 +2,6 @@ package alicloud
 
 import (
 	"fmt"
-	"os"
 	"testing"
 
 	"github.com/aliyun/terraform-provider-alicloud/alicloud/connectivity"
@@ -10,7 +9,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/helper/resource"
 )
 
-func SkipTestAccAlicloudCENTransitRouterGrantAttachment_basic0(t *testing.T) {
+func TestAccAliCloudCENTransitRouterGrantAttachment_basic0(t *testing.T) {
 	var v map[string]interface{}
 	resourceId := "alicloud_cen_transit_router_grant_attachment.default"
 	ra := resourceAttrInit(resourceId, AlicloudCenTransitRouterGrantAttachmentMap0)
@@ -34,7 +33,7 @@ func SkipTestAccAlicloudCENTransitRouterGrantAttachment_basic0(t *testing.T) {
 				Config: testAccConfig(map[string]interface{}{
 					"order_type":    "PayByCenOwner",
 					"instance_id":   "${data.alicloud_vpcs.default.ids.0}",
-					"cen_owner_id":  "${var.cen_owner_id}",
+					"cen_owner_id":  "${data.alicloud_account.default.id}",
 					"cen_id":        "${alicloud_cen_instance.default.id}",
 					"instance_type": "VPC",
 				}),
@@ -66,8 +65,7 @@ variable "name" {
   default = "%s"
 }
 
-variable "cen_owner_id" {
-  default = "%s"
+data "alicloud_account" "default" {
 }
 
 data "alicloud_vpcs" "default" {
@@ -79,5 +77,5 @@ resource "alicloud_cen_instance" "default" {
   description       = "test for transit router grant attachment"
 }
 
-`, name, os.Getenv("ALICLOUD_MAIN_ACCOUNT"))
+`, name)
 }
