@@ -29,7 +29,7 @@ func TestAccAliCloudMessageServiceEndpoint_basic10073(t *testing.T) {
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  nil,
 		Steps: []resource.TestStep{
 			{
@@ -105,7 +105,7 @@ func TestAccAliCloudMessageServiceEndpoint_basic9855(t *testing.T) {
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  nil,
 		Steps: []resource.TestStep{
 			{
@@ -163,7 +163,7 @@ func TestAccAliCloudMessageServiceEndpoint_basic9856(t *testing.T) {
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  nil,
 		Steps: []resource.TestStep{
 			{

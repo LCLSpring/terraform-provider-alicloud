@@ -36,7 +36,7 @@ func TestAccAliCloudCSKubernetesAddon_apiserver(t *testing.T) {
 		},
 		// module name
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		//CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -105,7 +105,7 @@ func TestAccAliCloudCSKubernetesAddon_terway_eniip(t *testing.T) {
 		},
 		// module name
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		Steps: []resource.TestStep{
 			{
 				// import
@@ -173,7 +173,7 @@ func TestAccAliCloudCSKubernetesAddon_logtail_ds(t *testing.T) {
 		},
 		// module name
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		Steps: []resource.TestStep{
 			{
 				Config: testAccConfig(map[string]interface{}{
@@ -251,7 +251,7 @@ func TestAccAliCloudCSKubernetesAddon_ack_node_problem_detector(t *testing.T) {
 		},
 		// module name
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		Steps: []resource.TestStep{
 			{
 				Config: testAccConfig(map[string]interface{}{
@@ -327,7 +327,7 @@ func TestAccAliCloudCSKubernetesAddon_vk(t *testing.T) {
 		},
 		// module name
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		Steps: []resource.TestStep{
 			{
 				Config: testAccConfig(map[string]interface{}{

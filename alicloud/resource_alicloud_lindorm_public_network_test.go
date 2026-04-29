@@ -31,7 +31,7 @@ func TestAccAliCloudLindormPublicNetwork_basic10782(t *testing.T) {
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		Steps: []resource.TestStep{
 			{
 				Config: testAccConfig(map[string]interface{}{
@@ -124,7 +124,7 @@ func TestAccAliCloudLindormPublicNetwork_basic10758(t *testing.T) {
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		Steps: []resource.TestStep{
 			{
 				Config: testAccConfig(map[string]interface{}{

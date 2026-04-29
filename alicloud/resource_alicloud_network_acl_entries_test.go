@@ -18,7 +18,7 @@ func TestAccAlicloudVPCNetworkAclEntries_basic(t *testing.T) {
 	resource.Test(t, resource.TestCase{
 		// module name
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  testAccCheckNetworkAclEntriesDestroy,
 		Steps: []resource.TestStep{
 			{

@@ -125,7 +125,7 @@ func TestAccAliCloudConfigRule_basic(t *testing.T) {
 			testAccPreCheckWithRegions(t, true, connectivity.CloudConfigSupportedRegions)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -274,7 +274,7 @@ func TestAccAliCloudConfigRule_status(t *testing.T) {
 			testAccPreCheckWithRegions(t, true, connectivity.CloudConfigSupportedRegions)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -343,7 +343,7 @@ func TestAccAliCloudConfigRule_fixbug(t *testing.T) {
 			testAccPreCheckWithRegions(t, true, connectivity.CloudConfigSupportedRegions)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -473,7 +473,7 @@ func SkipTestAccAliCloudConfigRule_basic1(t *testing.T) {
 			testAccPreCheckWithRegions(t, true, connectivity.CloudConfigSupportedRegions)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -656,7 +656,7 @@ func TestAccAliCloudConfigRule_regression(t *testing.T) {
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -759,7 +759,7 @@ func TestAccAliCloudConfigRule_basic3019(t *testing.T) {
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{

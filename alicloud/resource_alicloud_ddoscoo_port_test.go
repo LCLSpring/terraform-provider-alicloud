@@ -37,7 +37,7 @@ func TestAccAliCloudDdosCooPort_basic(t *testing.T) {
 		},
 
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -121,7 +121,7 @@ func TestAccAliCloudDdosCooPort_basic1(t *testing.T) {
 		},
 
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -469,7 +469,7 @@ func TestAccAliCloudDdosCooPort_basic7456(t *testing.T) {
 			testAccPreCheckWithRegions(t, true, connectivity.DdoscooSupportedRegions)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{

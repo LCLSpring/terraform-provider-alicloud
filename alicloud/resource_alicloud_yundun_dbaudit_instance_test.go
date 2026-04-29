@@ -135,7 +135,7 @@ func TestAccAlicloudYundunDbauditInstance_basic(t *testing.T) {
 			testAccPreCheckWithRegions(t, true, connectivity.YundunDbauditSupportedRegions)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  nil,
 		Steps: []resource.TestStep{
 			{

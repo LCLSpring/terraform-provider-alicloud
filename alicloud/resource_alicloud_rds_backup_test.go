@@ -35,7 +35,7 @@ func TestAccAliCloudRdsBackup_MySQL(t *testing.T) {
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  nil,
 		Steps: []resource.TestStep{
 			{
@@ -148,7 +148,7 @@ func TestAccAliCloudRdsBackup_PostgreSQL(t *testing.T) {
 			testAccPreCheckWithRegions(t, true, []connectivity.Region{"cn-hangzhou"})
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  nil,
 		Steps: []resource.TestStep{
 			{
@@ -248,7 +248,7 @@ func TestAccAliCloudRdsBackup_SQLServer(t *testing.T) {
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  nil,
 		Steps: []resource.TestStep{
 			{
@@ -293,7 +293,7 @@ func TestAccAliCloudRdsBackup_SQLServer1(t *testing.T) {
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  nil,
 		Steps: []resource.TestStep{
 			{

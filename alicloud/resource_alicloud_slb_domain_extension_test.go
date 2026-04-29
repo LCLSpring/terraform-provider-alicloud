@@ -28,7 +28,7 @@ func TestAccAlicloudSLBDomainExtensionBasic(t *testing.T) {
 		},
 		// module name
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		// module name
 		Steps: []resource.TestStep{

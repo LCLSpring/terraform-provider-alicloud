@@ -127,7 +127,7 @@ func TestAccAlicloudFCFunction_basic(t *testing.T) {
 
 	resource.Test(t, resource.TestCase{
 		PreCheck:     func() { testAccPreCheckWithRegions(t, false, connectivity.FcNoSupportedRegions) },
-		Providers:    testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy: rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -291,7 +291,7 @@ func TestAccAlicloudFCFunctionMulti(t *testing.T) {
 
 	resource.Test(t, resource.TestCase{
 		PreCheck:     func() { testAccPreCheckWithRegions(t, false, connectivity.FcNoSupportedRegions) },
-		Providers:    testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy: rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -335,7 +335,7 @@ func TestAccAlicloudFCFunction_custom_container(t *testing.T) {
 	// REQUIREMENT: the image must be in the repo already.
 	resource.Test(t, resource.TestCase{
 		PreCheck:     func() { testAccPreCheckWithRegions(t, false, connectivity.FcNoSupportedRegions) },
-		Providers:    testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy: rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -615,7 +615,7 @@ php server.php`)
 
 	resource.Test(t, resource.TestCase{
 		PreCheck:     func() { testAccPreCheckWithRegions(t, true, connectivity.FCV2FunctionSupportRegions) },
-		Providers:    testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy: rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -732,7 +732,7 @@ func TestAccAlicloudFCFunction_code_checksum(t *testing.T) {
 
 	resource.Test(t, resource.TestCase{
 		PreCheck:     func() { testAccPreCheckWithRegions(t, false, connectivity.FcNoSupportedRegions) },
-		Providers:    testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy: rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{

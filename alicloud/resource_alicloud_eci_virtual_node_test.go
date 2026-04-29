@@ -131,7 +131,7 @@ func TestAccAlicloudEciVirtualNode_basic0(t *testing.T) {
 			testAccPreCheckWithEnvVariable(t, "KUBE_CONFIG")
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -194,7 +194,7 @@ func TestAccAlicloudEciVirtualNode_basic2(t *testing.T) {
 			testAccPreCheckWithEnvVariable(t, "KUBE_CONFIG")
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{

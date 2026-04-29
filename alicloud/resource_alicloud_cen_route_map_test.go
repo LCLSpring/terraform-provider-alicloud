@@ -32,7 +32,7 @@ func TestAccAlicloudCenRouteMap_basic_child_instance_same_region(t *testing.T) {
 		},
 		// module name
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -166,7 +166,7 @@ func TestAccAlicloudCenRouteMap_basic_transit_router_route_table_id(t *testing.T
 		},
 		// module name
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -392,7 +392,7 @@ func TestAccAlicloudCenRouteMap_multi(t *testing.T) {
 		},
 		// module name
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{

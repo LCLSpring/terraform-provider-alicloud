@@ -28,7 +28,7 @@ func TestAccAlicloudCenChildInstanceRouteEntryToAttachment_basic1977(t *testing.
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{

@@ -14,7 +14,7 @@ func TestAccAlicloudMscSubContactVerificationMessageeDataSource(t *testing.T) {
 			testAccPreCheck(t)
 			testAccPreCheckWithEnvVariable(t, "NEED_REAL_MOBILE")
 		},
-		Providers: testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		Steps: []resource.TestStep{
 			{
 				Config: testAccCheckAlicloudMscSubContactVerificationMessageDataSource,

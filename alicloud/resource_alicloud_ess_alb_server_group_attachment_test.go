@@ -27,7 +27,7 @@ func TestAccAliCloudEssAlbServerGroupAttachment_basic(t *testing.T) {
 		// module name
 		IDRefreshName: resourceId,
 
-		Providers:    testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy: testAccCheckEssAlbServerGroupsDestroy,
 		Steps: []resource.TestStep{
 			{
@@ -72,7 +72,7 @@ func TestAccAliCloudEssAlbServerGroupAttachment_nonForceAttach(t *testing.T) {
 		// module name
 		IDRefreshName: resourceId,
 
-		Providers:    testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy: testAccCheckEssAlbServerGroupsDestroy,
 		Steps: []resource.TestStep{
 			{

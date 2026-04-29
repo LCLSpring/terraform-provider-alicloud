@@ -29,7 +29,7 @@ func TestAccAliCloudSlsCollectionPolicy_basic8160(t *testing.T) {
 			testAccPreCheckWithRegions(t, true, []connectivity.Region{"cn-shanghai"})
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -343,7 +343,7 @@ func TestAccAliCloudSlsCollectionPolicy_basic8140(t *testing.T) {
 			testAccPreCheckWithRegions(t, true, []connectivity.Region{"cn-shanghai"})
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -654,7 +654,7 @@ func TestAccAliCloudSlsCollectionPolicy_basic7850(t *testing.T) {
 			testAccPreCheckWithRegions(t, true, []connectivity.Region{"cn-shanghai"})
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -804,7 +804,7 @@ func TestAccAliCloudSlsCollectionPolicy_basic8160_twin(t *testing.T) {
 			testAccPreCheckWithRegions(t, true, []connectivity.Region{"cn-shanghai"})
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -884,7 +884,7 @@ func TestAccAliCloudSlsCollectionPolicy_basic8140_twin(t *testing.T) {
 			testAccPreCheckWithRegions(t, true, []connectivity.Region{"cn-shanghai"})
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -959,7 +959,7 @@ func TestAccAliCloudSlsCollectionPolicy_basic7850_twin(t *testing.T) {
 			testAccPreCheckWithRegions(t, true, []connectivity.Region{"cn-shanghai"})
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -1014,7 +1014,7 @@ func TestAccAliCloudSlsCollectionPolicy_basic8160_raw(t *testing.T) {
 			testAccPreCheckWithRegions(t, true, []connectivity.Region{"cn-shanghai"})
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -1187,7 +1187,7 @@ func TestAccAliCloudSlsCollectionPolicy_basic8140_raw(t *testing.T) {
 			testAccPreCheckWithRegions(t, true, []connectivity.Region{"cn-shanghai"})
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -1350,7 +1350,7 @@ func TestAccAliCloudSlsCollectionPolicy_basic7850_raw(t *testing.T) {
 			testAccPreCheckWithRegions(t, true, []connectivity.Region{"cn-shanghai"})
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{

@@ -39,7 +39,7 @@ func TestAccAliCloudEssScalingConfiguration_override(t *testing.T) {
 		// module name
 		IDRefreshName: resourceId,
 
-		Providers:    testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy: rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -108,7 +108,7 @@ func TestAccAliCloudEssScalingConfiguration_other(t *testing.T) {
 		// module name
 		IDRefreshName: resourceId,
 
-		Providers:    testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy: rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -182,7 +182,7 @@ func TestAccAliCloudEssScalingConfiguration_credit_specification(t *testing.T) {
 		// module name
 		IDRefreshName: resourceId,
 
-		Providers:    testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy: rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -259,7 +259,7 @@ func TestAccAliCloudEssScalingConfiguration_imageName(t *testing.T) {
 		// module name
 		IDRefreshName: resourceId,
 
-		Providers:    testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy: rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -323,7 +323,7 @@ func TestAccAliCloudEssScalingConfiguration_imageId(t *testing.T) {
 		// module name
 		IDRefreshName: resourceId,
 
-		Providers:    testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy: rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -392,7 +392,7 @@ func TestAccAliCloudEssScalingConfiguration_kms(t *testing.T) {
 		// module name
 		IDRefreshName: resourceId,
 
-		Providers:    testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy: rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -460,7 +460,7 @@ func TestAccAliCloudEssScalingConfiguration_Update(t *testing.T) {
 		// module name
 		IDRefreshName: resourceId,
 
-		Providers:    testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy: rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -790,7 +790,7 @@ func TestAccAliCloudEssScalingConfiguration_PerformanceLevel(t *testing.T) {
 		// module name
 		IDRefreshName: resourceId,
 
-		Providers:    testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy: rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -967,7 +967,7 @@ func TestAccAliCloudEssScalingConfiguration_CustomPrioritiesCreate(t *testing.T)
 		// module name
 		IDRefreshName: resourceId,
 
-		Providers:    testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy: rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -1039,7 +1039,7 @@ func TestAccAliCloudEssScalingConfiguration_CustomPrioritiesModify(t *testing.T)
 		// module name
 		IDRefreshName: resourceId,
 
-		Providers:    testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy: rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -1119,7 +1119,7 @@ func TestAccAliCloudEssScalingConfiguration_EnchanceCreate(t *testing.T) {
 		// module name
 		IDRefreshName: resourceId,
 
-		Providers:    testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy: rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -1225,7 +1225,7 @@ func TestAccAliCloudEssScalingConfiguration_DedicatedHostClusterId_HttpEndpoint_
 		// module name
 		IDRefreshName: resourceId,
 
-		Providers:    testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy: rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -1343,7 +1343,7 @@ func TestAccAliCloudEssScalingConfiguration_DedicatedHostClusterId_HttpEndpoint(
 		// module name
 		IDRefreshName: resourceId,
 
-		Providers:    testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy: rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -1460,7 +1460,7 @@ func TestAccAliCloudEssScalingConfiguration_Enchance(t *testing.T) {
 		// module name
 		IDRefreshName: resourceId,
 
-		Providers:    testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy: rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -1682,7 +1682,7 @@ func TestAccAliCloudEssScalingConfiguration_Multi(t *testing.T) {
 		// module name
 		IDRefreshName: resourceId,
 
-		Providers:    testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy: rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -2154,7 +2154,7 @@ func TestAccAliCloudEssScalingConfiguration_InstancePatternInfo(t *testing.T) {
 		// module name
 		IDRefreshName: resourceId,
 
-		Providers:    testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy: rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -2422,7 +2422,7 @@ func TestAccAliCloudEssScalingConfiguration_OnlyInstancePatternInfo(t *testing.T
 		// module name
 		IDRefreshName: resourceId,
 
-		Providers:    testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy: rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -2657,7 +2657,7 @@ func TestAccAliCloudEssScalingConfiguration_InstancePatternInfo_InstanceTypeFami
 		// module name
 		IDRefreshName: resourceId,
 
-		Providers:    testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy: rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -2888,7 +2888,7 @@ func TestAccAliCloudEssScalingConfiguration_InstancePatternInfo_CpuAndRange(t *t
 		// module name
 		IDRefreshName: resourceId,
 
-		Providers:    testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy: rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -3165,7 +3165,7 @@ func TestAccAliCloudEssScalingConfiguration_NetworkInterfaces(t *testing.T) {
 		// module name
 		IDRefreshName: resourceId,
 
-		Providers:    testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy: rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -3274,7 +3274,7 @@ func TestAccAliCloudEssScalingConfiguration_InstanceTypeOverride(t *testing.T) {
 		// module name
 		IDRefreshName: resourceId,
 
-		Providers:    testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy: rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{

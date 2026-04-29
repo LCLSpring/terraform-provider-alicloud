@@ -122,7 +122,7 @@ func TestAccAliCloudAlikafkaInstance_basic(t *testing.T) {
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rc.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -320,7 +320,7 @@ func TestAccAliCloudAlikafkaInstance_convert(t *testing.T) {
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  nil,
 		Steps: []resource.TestStep{
 			{
@@ -403,7 +403,7 @@ func TestAccAliCloudAlikafkaInstance_prepaid(t *testing.T) {
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  nil,
 		Steps: []resource.TestStep{
 			{
@@ -475,7 +475,7 @@ func TestAccAliCloudAlikafkaInstance_VpcId(t *testing.T) {
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -591,7 +591,7 @@ func TestAccAliCloudAlikafkaInstance_Serverless(t *testing.T) {
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -679,7 +679,7 @@ func SkipTestAccAliCloudAlikafkaInstance_Confluent(t *testing.T) {
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  nil,
 		Steps: []resource.TestStep{
 			{

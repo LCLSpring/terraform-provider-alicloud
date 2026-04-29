@@ -143,7 +143,7 @@ func TestAccAliCloudVPNCustomerGatewayBasic(t *testing.T) {
 
 		// module name
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  testAccCheckVpnCustomerGatewayDestroy,
 		Steps: []resource.TestStep{
 			{
@@ -210,7 +210,7 @@ func TestAccAliCloudVPNCustomerGatewayMulti(t *testing.T) {
 
 		// module name
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  testAccCheckVpnCustomerGatewayDestroy,
 		Steps: []resource.TestStep{
 			{
@@ -293,7 +293,7 @@ func TestAccAliCloudVPNCustomerGateway_basic2(t *testing.T) {
 		},
 
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -357,7 +357,7 @@ func TestAccAliCloudVPNGatewayCustomerGateway_basic3650(t *testing.T) {
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -512,7 +512,7 @@ func TestAccAliCloudVPNGatewayCustomerGateway_basic3650_twin(t *testing.T) {
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{

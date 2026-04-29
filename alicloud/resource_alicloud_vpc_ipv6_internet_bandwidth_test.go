@@ -37,7 +37,7 @@ func TestAccAliCloudVPCIpv6InternetBandwidth_basic0(t *testing.T) {
 			testAccPreCheckWithRegions(t, true, connectivity.VpcIpv6InternetBandwidthSupportRegions)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{

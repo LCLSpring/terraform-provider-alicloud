@@ -26,7 +26,7 @@ func TestAccAliCloudPolarDBBackupPolicy(t *testing.T) {
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -122,7 +122,7 @@ func TestAccAliCloudPolarDBNewBackupPolicy(t *testing.T) {
 			testAccPreCheckWithRegions(t, true, connectivity.PolarDBNewBackupPolicySupportRegions)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{

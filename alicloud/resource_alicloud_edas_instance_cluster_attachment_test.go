@@ -31,7 +31,7 @@ func TestAccAlicloudEdasinstanceClusterAttachment_basic(t *testing.T) {
 		},
 
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  testEdasCheckICAttachmentDestroy,
 		Steps: []resource.TestStep{
 			{

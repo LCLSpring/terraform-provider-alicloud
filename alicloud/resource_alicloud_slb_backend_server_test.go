@@ -32,7 +32,7 @@ func TestAccAliCloudSLBBackendServers_vpc(t *testing.T) {
 
 		// module name
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -149,7 +149,7 @@ func TestAccAliCloudSLBBackendServers_multi_vpc(t *testing.T) {
 
 		// module name
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -199,7 +199,7 @@ func TestAccAliCloudSLBBackendServers_classic(t *testing.T) {
 
 		// module name
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(), //testAccCheckSlbBackendServersDestroy,
 		Steps: []resource.TestStep{
 			{
@@ -289,7 +289,7 @@ func TestAccAliCloudSLBBackendServers_eci(t *testing.T) {
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{

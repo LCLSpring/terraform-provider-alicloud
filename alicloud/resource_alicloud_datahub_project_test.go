@@ -134,7 +134,7 @@ func TestAccAlicloudDatahubProject_basic(t *testing.T) {
 		},
 		// module name
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -192,7 +192,7 @@ func TestAccAlicloudDatahubProject_multi(t *testing.T) {
 		},
 		// module name
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{

@@ -91,7 +91,7 @@ func TestAccAliCloudRAMAccountAlias_basic(t *testing.T) {
 		// module name
 		IDRefreshName: resourceId,
 
-		Providers:    testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy: testAccCheckRamAccountAliasDestroy,
 		Steps: []resource.TestStep{
 			{
@@ -161,7 +161,7 @@ func TestAccAliCloudRamAccountAlias_basic9000(t *testing.T) {
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		Steps: []resource.TestStep{
 			{
 				Config: testAccConfig(map[string]interface{}{

@@ -29,7 +29,7 @@ func TestAccAlicloudSAESlbInternet_basic0(t *testing.T) {
 			testAccPreCheckWithRegions(t, true, connectivity.SaeSupportRegions)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{

@@ -18,7 +18,7 @@ func TestAccAliCloudCSKubernetesAddonsDataSource(t *testing.T) {
 		PreCheck: func() {
 			testAccPreCheck(t)
 		},
-		Providers: testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		Steps: []resource.TestStep{
 			{
 				Config: dataSourceCSAddonsConfigDependence(name),
@@ -46,7 +46,7 @@ func TestAccAliCloudCSKubernetesAddonsDataSource_installed(t *testing.T) {
 		PreCheck: func() {
 			testAccPreCheck(t)
 		},
-		Providers: testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		Steps: []resource.TestStep{
 			{
 				Config: dataSourceCSAddonsConfigDependence(name),
@@ -78,7 +78,7 @@ func TestAccAliCloudCSKubernetesAddonsDataSource_notInstalled(t *testing.T) {
 		PreCheck: func() {
 			testAccPreCheck(t)
 		},
-		Providers: testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		Steps: []resource.TestStep{
 			{
 				Config: dataSourceCSAddonsConfigDependence(name),
@@ -110,7 +110,7 @@ func TestAccAliCloudCSKubernetesAddonsDataSource_installedWithUpgradeVersion(t *
 		PreCheck: func() {
 			testAccPreCheck(t)
 		},
-		Providers: testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		Steps: []resource.TestStep{
 			{
 				Config: dataSourceCSAddonsConfigDependence(name),

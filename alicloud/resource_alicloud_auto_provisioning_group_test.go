@@ -37,7 +37,7 @@ func TestAccAlicloudAutoProvisioningGroup(t *testing.T) {
 		PreCheck: func() {
 			testAccPreCheck(t)
 		},
-		Providers:    testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy: rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -211,7 +211,7 @@ func TestAccAlicloudAutoProvisioningGroup_valid(t *testing.T) {
 		PreCheck: func() {
 			testAccPreCheck(t)
 		},
-		Providers:    testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy: rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{

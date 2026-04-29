@@ -11,7 +11,7 @@ func TestAccAlicloudAccountDataSource_basic(t *testing.T) {
 		PreCheck: func() {
 			testAccPreCheck(t)
 		},
-		Providers: testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		Steps: []resource.TestStep{
 			{
 				Config: testAccCheckAlicloudAccountDataSourceBasic,

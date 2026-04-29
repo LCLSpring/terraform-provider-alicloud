@@ -32,7 +32,7 @@ func TestAccAlicloudSLBMasterSlaveServerGroup_vpc(t *testing.T) {
 
 		//module name
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -94,7 +94,7 @@ func TestAccAlicloudSLBMasterSlaveServerGroup_multi_vpc(t *testing.T) {
 
 		// module name
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{

@@ -29,7 +29,7 @@ func TestAccAliCloudNlbLoadbalancerCommonBandwidthPackageAttachment_basic4619(t 
 			testAccPreCheckWithRegions(t, true, connectivity.NLBSupportRegions)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{

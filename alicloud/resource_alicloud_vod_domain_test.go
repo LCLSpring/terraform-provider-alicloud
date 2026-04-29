@@ -27,7 +27,7 @@ func TestAccAlicloudVODDomain_basic0(t *testing.T) {
 			testAccPreCheckWithRegions(t, true, connectivity.VodSupportRegions)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{

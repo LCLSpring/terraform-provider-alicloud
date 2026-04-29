@@ -11,7 +11,7 @@ func TestAccAliCloudECSInstanceTypesDataSource_basic(t *testing.T) {
 		PreCheck: func() {
 			testAccPreCheck(t)
 		},
-		Providers: testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		Steps: []resource.TestStep{
 			{
 				Config: testAccCheckAliCloudInstanceTypesDataSourceBasicConfig,
@@ -115,7 +115,7 @@ func TestAccAliCloudECSInstanceTypesDataSource_gpu(t *testing.T) {
 		PreCheck: func() {
 			testAccPreCheck(t)
 		},
-		Providers: testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		Steps: []resource.TestStep{
 			{
 				Config: testAccCheckAliCloudInstanceTypesDataSourceGpu,
@@ -190,7 +190,7 @@ func TestAccAliCloudECSInstanceTypesDataSource_empty(t *testing.T) {
 		PreCheck: func() {
 			testAccPreCheck(t)
 		},
-		Providers: testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		Steps: []resource.TestStep{
 			{
 				Config: testAccCheckAliCloudInstanceTypesDataSourceEmpty,
@@ -218,7 +218,7 @@ func TestAccAliCloudECSInstanceTypesDataSource_k8sSpec(t *testing.T) {
 		PreCheck: func() {
 			testAccPreCheck(t)
 		},
-		Providers: testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		Steps: []resource.TestStep{
 			{
 				Config: testAccCheckAliCloudInstanceTypesDataSourceK8Sc1g2,
@@ -269,7 +269,7 @@ func TestAccAliCloudECSInstanceTypesDataSource_k8sFamily(t *testing.T) {
 		PreCheck: func() {
 			testAccPreCheck(t)
 		},
-		Providers: testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		Steps: []resource.TestStep{
 			{
 				Config: testAccCheckAliCloudInstanceTypesDataSourceK8ST5,
@@ -297,7 +297,7 @@ func TestAccAliCloudECSInstanceTypesDataSource_imageId(t *testing.T) {
 		PreCheck: func() {
 			testAccPreCheck(t)
 		},
-		Providers: testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		Steps: []resource.TestStep{
 			{
 				Config: testAccCheckAliCloudInstanceTypesDataSourceImageId,

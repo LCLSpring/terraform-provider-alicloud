@@ -13,7 +13,7 @@ func TestAccAlicloudMnsServiceDataSource(t *testing.T) {
 			testAccPreCheck(t)
 			testAccPreCheckWithRegions(t, false, []connectivity.Region{connectivity.EUCentral1})
 		},
-		Providers: testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		Steps: []resource.TestStep{
 			{
 				Config: testAccCheckAlicloudMnsServiceDataSource,

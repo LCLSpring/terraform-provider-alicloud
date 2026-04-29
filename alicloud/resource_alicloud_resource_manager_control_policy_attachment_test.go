@@ -35,7 +35,7 @@ func TestAccAliCloudResourceManagerControlPolicyAttachment_basic0(t *testing.T) 
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -295,7 +295,7 @@ func TestAccAliCloudResourceManagerControlPolicyAttachment_basic11253(t *testing
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{

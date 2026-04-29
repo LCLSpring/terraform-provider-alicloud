@@ -29,7 +29,7 @@ func TestAccAliCloudClickHouseEnterpriseDbClusterSecurityIP_basic10562(t *testin
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{

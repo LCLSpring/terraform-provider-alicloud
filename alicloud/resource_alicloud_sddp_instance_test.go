@@ -36,7 +36,7 @@ func TestAccAlicloudSDDPInstance_basic0(t *testing.T) {
 			testAccPreCheckWithTime(t, []int{30})
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  nil,
 		Steps: []resource.TestStep{
 			{

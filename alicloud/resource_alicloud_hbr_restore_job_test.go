@@ -39,7 +39,7 @@ func SkipTestAccAlicloudHBRRestoreJob_basic0(t *testing.T) {
 			testAccPreCheckWithRegions(t, true, connectivity.HbrSupportRegions)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  nil,
 		Steps: []resource.TestStep{
 			{
@@ -102,7 +102,7 @@ func SkipTestAccAlicloudHBRRestoreJob_basic1(t *testing.T) {
 			testAccPreCheckWithRegions(t, true, connectivity.HbrSupportRegions)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  nil,
 		Steps: []resource.TestStep{
 			{
@@ -158,7 +158,7 @@ func SkipTestAccAlicloudHBRRestoreJob_basic2(t *testing.T) {
 			testAccPreCheckWithRegions(t, true, connectivity.HbrSupportRegions)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  nil,
 		Steps: []resource.TestStep{
 			{
@@ -213,7 +213,7 @@ func SkipTestAccAlicloudHBRRestoreJob_basic3(t *testing.T) {
 			testAccPreCheckWithRegions(t, true, connectivity.HbrSupportRegions)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  nil,
 		Steps: []resource.TestStep{
 			{
@@ -269,7 +269,7 @@ func SkipTestAccAlicloudHBRRestoreJob_basic4(t *testing.T) {
 			testAccPreCheckWithRegions(t, true, connectivity.HbrSupportRegions)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  nil,
 		Steps: []resource.TestStep{
 			{

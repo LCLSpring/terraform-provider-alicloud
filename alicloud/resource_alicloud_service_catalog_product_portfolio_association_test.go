@@ -29,7 +29,7 @@ func TestAccAliCloudServiceCatalogProductPortfolioAssociation_basic7473(t *testi
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{

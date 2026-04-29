@@ -120,7 +120,7 @@ func TestAccAliCloudDTSSubscriptionJob_basic0(t *testing.T) {
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		// TODO: there is an api bug that the API DescribeDtsJobDetail can get resource even if it has been deleted.
 		//CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
@@ -280,7 +280,7 @@ func TestAccAliCloudDTSSubscriptionJob_basic1(t *testing.T) {
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		// TODO: there is an api bug that the API DescribeDtsJobDetail can get resource even if it has been deleted.
 		//CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
@@ -454,7 +454,7 @@ func TestAccAliCloudDTSSubscriptionJob_basic2(t *testing.T) {
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  nil,
 		Steps: []resource.TestStep{
 			{

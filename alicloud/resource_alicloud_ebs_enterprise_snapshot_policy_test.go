@@ -29,7 +29,7 @@ func TestAccAliCloudEbsEnterpriseSnapshotPolicy_basic5473(t *testing.T) {
 			testAccPreCheckWithRegions(t, true, connectivity.EbsEnterpriseSnapshotPolicySupportRegions)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -376,7 +376,7 @@ func TestAccAliCloudEbsEnterpriseSnapshotPolicy_basic5494(t *testing.T) {
 			testAccPreCheckWithRegions(t, true, connectivity.EbsEnterpriseSnapshotPolicySupportRegions)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -603,7 +603,7 @@ func TestAccAliCloudEbsEnterpriseSnapshotPolicy_basic5484(t *testing.T) {
 			testAccPreCheckWithRegions(t, true, connectivity.EbsEnterpriseSnapshotPolicySupportRegions)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -818,7 +818,7 @@ func TestAccAliCloudEbsEnterpriseSnapshotPolicy_basic5473_twin(t *testing.T) {
 			testAccPreCheckWithRegions(t, true, connectivity.EbsEnterpriseSnapshotPolicySupportRegions)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -922,7 +922,7 @@ func TestAccAliCloudEbsEnterpriseSnapshotPolicy_basic5494_twin(t *testing.T) {
 			testAccPreCheckWithRegions(t, true, connectivity.EbsEnterpriseSnapshotPolicySupportRegions)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -991,7 +991,7 @@ func TestAccAliCloudEbsEnterpriseSnapshotPolicy_basic5484_twin(t *testing.T) {
 			testAccPreCheckWithRegions(t, true, connectivity.EbsEnterpriseSnapshotPolicySupportRegions)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{

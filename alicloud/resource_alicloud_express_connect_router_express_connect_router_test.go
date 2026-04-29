@@ -28,7 +28,7 @@ func TestAccAliCloudExpressConnectRouterExpressConnectRouter_basic5682(t *testin
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -288,7 +288,7 @@ func TestAccAliCloudExpressConnectRouterExpressConnectRouter_basic5682_twin(t *t
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -342,7 +342,7 @@ func TestAccAliCloudExpressConnectRouterExpressConnectRouter_basic5682_raw(t *te
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{

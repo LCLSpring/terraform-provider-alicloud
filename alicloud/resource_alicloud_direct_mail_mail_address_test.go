@@ -127,7 +127,7 @@ func SkipTestAccAlicloudDirectMailMailAddress_basic0(t *testing.T) {
 			testAccPreCheckWithRegions(t, true, connectivity.DmSupportRegions)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{

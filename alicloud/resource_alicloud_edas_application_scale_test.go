@@ -33,7 +33,7 @@ func SkipTestAccAlicloudEdasApplicationScale_basic(t *testing.T) {
 		},
 
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  testEdasCheckIAAttachmentDestroy,
 		Steps: []resource.TestStep{
 			{

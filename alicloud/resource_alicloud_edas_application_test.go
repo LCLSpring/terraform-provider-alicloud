@@ -140,7 +140,7 @@ func TestAccAlicloudEdasApplication_basic(t *testing.T) {
 		},
 
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  testAccCheckEdasApplicationDestroy,
 		Steps: []resource.TestStep{
 			{
@@ -207,7 +207,7 @@ func TestAccAlicloudEdasApplication_multi(t *testing.T) {
 		},
 
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  testAccCheckEdasApplicationDestroy,
 		Steps: []resource.TestStep{
 			{

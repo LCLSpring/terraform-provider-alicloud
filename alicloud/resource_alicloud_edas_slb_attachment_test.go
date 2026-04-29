@@ -33,7 +33,7 @@ func SkipTestAccAlicloudEdasSlbAttachment_basic(t *testing.T) {
 		},
 
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  testEdasCheckSLBAttachmentDestroy,
 		Steps: []resource.TestStep{
 			{

@@ -36,7 +36,7 @@ func TestAccAlicloudARMSPrometheusAlertRule_basic0(t *testing.T) {
 			testAccPreCheckPrePaidResources(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -185,7 +185,7 @@ func TestAccAlicloudARMSPrometheusAlertRule_basic1(t *testing.T) {
 			testAccPreCheckPrePaidResources(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{

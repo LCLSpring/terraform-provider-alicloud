@@ -36,7 +36,7 @@ func TestAccAliCloudCloudFirewallInstance_basic0(t *testing.T) {
 			testAccPreCheckForCleanUpInstances(t, "", "vipcloudfw", "vipcloudfw", "cfw", "cfw_pre_intl")
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -89,7 +89,7 @@ func TestAccAliCloudCloudFirewallInstance_basic0_twin(t *testing.T) {
 			testAccPreCheckForCleanUpInstances(t, "", "vipcloudfw", "vipcloudfw", "cfw", "cfw_pre_intl")
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -133,7 +133,7 @@ func TestAccAliCloudCloudFirewallInstance_basic1(t *testing.T) {
 			testAccPreCheckForCleanUpInstances(t, "", "vipcloudfw", "vipcloudfw", "cfw", "cfw_pre_intl")
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  nil,
 		Steps: []resource.TestStep{
 			{

@@ -29,7 +29,7 @@ func TestAccAlicloudVpcGatewayEndpointRouteTableAttachment_basic3634(t *testing.
 			testAccPreCheckWithRegions(t, true, connectivity.VPCGatewayEndpointSupportRegions)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{

@@ -28,7 +28,7 @@ func TestAccAliCloudKVStoreAccount_basic(t *testing.T) {
 			testAccPreCheckWithRegions(t, true, connectivity.KvStoreSupportRegions)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -117,7 +117,7 @@ func TestAccAliCloudKVStoreAccount_kms_encrypted_password(t *testing.T) {
 			testAccPreCheckWithRegions(t, true, connectivity.KvStoreSupportRegions)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -180,7 +180,7 @@ func TestAccAliCloudKVStoreAccount_basic_v5(t *testing.T) {
 			testAccPreCheckWithRegions(t, true, connectivity.KvStoreSupportRegions)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -389,7 +389,7 @@ func TestAccAliCloudRedisAccount_basic11424(t *testing.T) {
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{

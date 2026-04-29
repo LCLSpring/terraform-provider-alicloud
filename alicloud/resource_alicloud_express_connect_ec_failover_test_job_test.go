@@ -29,7 +29,7 @@ func TestAccAliCloudExpressConnectEcFailoverTestJob_basic5403(t *testing.T) {
 			checkoutSupportedRegions(t, true, connectivity.VbrSupportRegions)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -96,7 +96,7 @@ func TestAccAliCloudExpressConnectEcFailoverTestJob_basic5369(t *testing.T) {
 			checkoutSupportedRegions(t, true, connectivity.VbrSupportRegions)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -275,7 +275,7 @@ func TestAccAliCloudExpressConnectEcFailoverTestJob_basic5403_twin(t *testing.T)
 			checkoutSupportedRegions(t, true, connectivity.VbrSupportRegions)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -328,7 +328,7 @@ func TestAccAliCloudExpressConnectEcFailoverTestJob_basic5369_twin(t *testing.T)
 			checkoutSupportedRegions(t, true, connectivity.VbrSupportRegions)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{

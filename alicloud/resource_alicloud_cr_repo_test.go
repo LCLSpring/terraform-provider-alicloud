@@ -30,7 +30,7 @@ func TestAccAlicloudCRRepo_Basic(t *testing.T) {
 			testAccPreCheckWithRegions(t, false, connectivity.CRNoSupportedRegions)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -130,7 +130,7 @@ func TestAccAlicloudCRRepo_Multi(t *testing.T) {
 			testAccPreCheckWithRegions(t, false, connectivity.CRNoSupportedRegions)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{

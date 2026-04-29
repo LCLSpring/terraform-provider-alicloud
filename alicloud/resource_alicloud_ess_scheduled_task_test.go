@@ -113,7 +113,7 @@ func TestAccAliCloudEssScheduledTask_basic(t *testing.T) {
 		// module name
 		IDRefreshName: resourceId,
 
-		Providers:    testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy: testAccCheckEssScheduledTaskDestroy,
 		Steps: []resource.TestStep{
 			{
@@ -244,7 +244,7 @@ func TestAccAliCloudEssScheduledTask_basic_2(t *testing.T) {
 		// module name
 		IDRefreshName: resourceId,
 
-		Providers:    testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy: testAccCheckEssScheduledTaskDestroy,
 		Steps: []resource.TestStep{
 			{
@@ -346,7 +346,7 @@ func TestAccAliCloudEssScheduledTask_basic_3(t *testing.T) {
 		// module name
 		IDRefreshName: resourceId,
 
-		Providers:    testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy: testAccCheckEssScheduledTaskDestroy,
 		Steps: []resource.TestStep{
 			{
@@ -444,7 +444,7 @@ func TestAccAliCloudEssScheduledTask_basic4(t *testing.T) {
 		// module name
 		IDRefreshName: resourceId,
 
-		Providers:    testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy: testAccCheckEssScheduledTaskDestroy,
 		Steps: []resource.TestStep{
 			{
@@ -509,7 +509,7 @@ func TestAccAliCloudEssScheduledTask_multi(t *testing.T) {
 		// module name
 		IDRefreshName: resourceId,
 
-		Providers:    testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy: testAccCheckEssScheduledTaskDestroy,
 		Steps: []resource.TestStep{
 			{
@@ -554,7 +554,7 @@ func TestAccAliCloudEssScheduledTask_max_min_supportZero(t *testing.T) {
 		// module name
 		IDRefreshName: resourceId,
 
-		Providers:    testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy: testAccCheckEssScheduledTaskDestroy,
 		Steps: []resource.TestStep{
 			{

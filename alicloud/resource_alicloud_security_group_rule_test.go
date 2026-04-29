@@ -27,7 +27,7 @@ func TestAccAliCloudECSSecurityGroupRuleBasic(t *testing.T) {
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  testAccCheckSecurityGroupRuleDestroy,
 		Steps: []resource.TestStep{
 			{
@@ -98,7 +98,7 @@ func TestAccAliCloudECSSecurityGroupRuleEgress(t *testing.T) {
 		},
 		// module name
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  testAccCheckSecurityGroupRuleDestroy,
 		Steps: []resource.TestStep{
 			{
@@ -143,7 +143,7 @@ func TestAccAliCloudECSSecurityGroupRuleMulti(t *testing.T) {
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  testAccCheckSecurityGroupRuleDestroy,
 		Steps: []resource.TestStep{
 			{
@@ -177,7 +177,7 @@ func TestAccAliCloudECSSecurityGroupRulePrefixList(t *testing.T) {
 		},
 		// module name
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  testAccCheckSecurityGroupRuleDestroy,
 		Steps: []resource.TestStep{
 			{
@@ -222,7 +222,7 @@ func TestAccAliCloudECSSecurityGroupRuleEgressIpv6(t *testing.T) {
 		},
 		// module name
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  testAccCheckSecurityGroupRuleDestroy,
 		Steps: []resource.TestStep{
 			{
@@ -260,7 +260,7 @@ func TestAccAliCloudECSSecurityGroupRuleIngressIpv6(t *testing.T) {
 		},
 		// module name
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  testAccCheckSecurityGroupRuleDestroy,
 		Steps: []resource.TestStep{
 			{
@@ -305,7 +305,7 @@ func TestAccAliCloudECSSecurityGroupRuleEgressOtherIpv6(t *testing.T) {
 		},
 		// module name
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  testAccCheckSecurityGroupRuleDestroy,
 		Steps: []resource.TestStep{
 			{
@@ -344,7 +344,7 @@ func TestAccAliCloudECSSecurityGroupRuleIngressOtherIpv6(t *testing.T) {
 		},
 		// module name
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  testAccCheckSecurityGroupRuleDestroy,
 		Steps: []resource.TestStep{
 			{
@@ -389,7 +389,7 @@ func TestAccAliCloudECSSecurityGroupRuleEgressICMPv6(t *testing.T) {
 		},
 		// module name
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  testAccCheckSecurityGroupRuleDestroy,
 		Steps: []resource.TestStep{
 			{

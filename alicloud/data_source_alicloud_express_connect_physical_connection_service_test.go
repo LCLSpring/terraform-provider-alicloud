@@ -13,7 +13,7 @@ func TestAccAliCloudExpressConnectPhysicalConnectionServiceDataSource(t *testing
 		PreCheck: func() {
 			testAccPreCheck(t)
 		},
-		Providers: testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		Steps: []resource.TestStep{
 			{
 				Config: testAccCheckAlicloudPhysicalConnectionServiceDataSource,

@@ -151,7 +151,7 @@ func SkipTestAccAlicloudVPNGatewayBasic(t *testing.T) {
 
 		// module name
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  testAccCheckVpnGatewayDestroy,
 		Steps: []resource.TestStep{
 			{
@@ -387,7 +387,7 @@ func TestAccAliCloudVPNGateway_basic2(t *testing.T) {
 		},
 
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -518,7 +518,7 @@ func TestAccAliCloudVPNGateway_basic3(t *testing.T) {
 		},
 
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -616,7 +616,7 @@ func TestAccAliCloudVPNGateway_basic4(t *testing.T) {
 		},
 
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -741,7 +741,7 @@ func TestAccAliCloudVPNGatewayVPNGateway_basic5658(t *testing.T) {
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		// CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -918,7 +918,7 @@ func TestAccAliCloudVPNGatewayVPNGateway_basic5485(t *testing.T) {
 			testAccPreCheckWithRegions(t, true, connectivity.VPNSupportRegions)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		// CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -1076,7 +1076,7 @@ func TestAccAliCloudVPNGatewayVPNGateway_basic5632(t *testing.T) {
 			testAccPreCheckWithRegions(t, true, connectivity.VPNSupportRegions)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		// CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -1234,7 +1234,7 @@ func TestAccAliCloudVPNGatewayVPNGateway_basic3671(t *testing.T) {
 			testAccPreCheckWithRegions(t, true, connectivity.VPNSupportRegions)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		// CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -1538,7 +1538,7 @@ func TestAccAliCloudVPNGatewayVPNGateway_basic5489(t *testing.T) {
 			// testAccPreCheckWithRegions(t, true, connectivity.VPNSupportRegions)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		// CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -1698,7 +1698,7 @@ func TestAccAliCloudVPNGatewayVPNGateway_basic5488(t *testing.T) {
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		// CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{

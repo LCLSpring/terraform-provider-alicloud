@@ -29,7 +29,7 @@ func TestAccAliCloudCSKubernetesPolicyInstance_basic(t *testing.T) {
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceID,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{

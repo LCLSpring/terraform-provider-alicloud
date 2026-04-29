@@ -121,7 +121,7 @@ func TestAccAliCloudDBFSInstance_basic0(t *testing.T) {
 			testAccPreCheckWithRegions(t, true, connectivity.DBFSSystemSupportRegions)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -302,7 +302,7 @@ func TestAccAliCloudDbfsDbfsInstance_basic5069(t *testing.T) {
 			testAccPreCheckWithRegions(t, true, connectivity.DBFSSystemSupportRegions)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -518,7 +518,7 @@ func TestAccAliCloudDbfsDbfsInstance_basic5069_twin(t *testing.T) {
 			testAccPreCheckWithRegions(t, true, connectivity.DBFSSystemSupportRegions)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{

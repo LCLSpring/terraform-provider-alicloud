@@ -28,7 +28,7 @@ func TestAccAliCloudNlbLoadBalancerSecurityGroupAttachment_basic(t *testing.T) {
 			testAccPreCheckWithRegions(t, true, connectivity.NLBSupportRegions)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -134,7 +134,7 @@ func TestAccAliCloudNlbLoadBalancerSecurityGroupAttachment_basic4781(t *testing.
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{

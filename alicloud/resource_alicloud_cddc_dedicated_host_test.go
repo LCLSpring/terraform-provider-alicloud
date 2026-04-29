@@ -36,7 +36,7 @@ func TestAccAlicloudCddcDedicatedHost_basic0(t *testing.T) {
 			testAccPreCheckWithRegions(t, true, connectivity.CDDCSupportRegions)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  nil,
 		Steps: []resource.TestStep{
 			{
@@ -148,7 +148,7 @@ func TestAccAlicloudCddcDedicatedHost_basic1(t *testing.T) {
 			testAccPreCheckWithRegions(t, true, connectivity.CDDCSupportRegions)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  nil,
 		Steps: []resource.TestStep{
 			{

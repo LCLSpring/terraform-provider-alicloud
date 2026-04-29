@@ -39,7 +39,7 @@ func TestAccAliCloudMongoDBReplicaSetRole_basic0(t *testing.T) {
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  checkDestroy,
 		Steps: []resource.TestStep{
 			{

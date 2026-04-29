@@ -32,7 +32,7 @@ func TestAccAlicloudEdasApplicationPackageAttachment_basic(t *testing.T) {
 		},
 
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  testEdasCheckDeploymentDestroy,
 		Steps: []resource.TestStep{
 			{

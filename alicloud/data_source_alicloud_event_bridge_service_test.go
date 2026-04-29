@@ -15,7 +15,7 @@ func TestAccAlicloudEventBridgeServiceDataSource(t *testing.T) {
 			testAccPreCheck(t)
 			testAccPreCheckWithRegions(t, true, connectivity.BssOpenApiSupportRegions)
 		},
-		Providers: testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		Steps: []resource.TestStep{
 			{
 				Config: testAccCheckAlicloudEventBridgeServiceDataSource,

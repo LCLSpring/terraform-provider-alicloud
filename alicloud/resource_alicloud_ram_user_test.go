@@ -183,7 +183,7 @@ func TestAccAliCloudRAMUser(t *testing.T) {
 
 		// module name
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  testAccCheckRamUserDestroy,
 		Steps: []resource.TestStep{
 			{

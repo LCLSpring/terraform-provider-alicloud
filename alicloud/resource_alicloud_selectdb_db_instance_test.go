@@ -80,7 +80,7 @@ func TestAccAliCloudSelectDBDbInstance_basic_info_upgrade_major_version(t *testi
 			testAccPreCheckWithRegions(t, true, connectivity.SelectDBSupportRegions)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -258,7 +258,7 @@ func TestAccAliCloudSelectDBDbInstance_basic_payment_modify_upgrade_minor_versio
 			testAccPreCheckWithRegions(t, true, connectivity.SelectDBSupportRegions)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -347,7 +347,7 @@ func TestAccAliCloudSelectDBDbInstance_deprecated_upgrade_minor_version(t *testi
 			testAccPreCheckWithRegions(t, true, connectivity.SelectDBSupportRegions)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
