@@ -28,7 +28,7 @@ func TestAccAliCloudEssVserverGroups_basic(t *testing.T) {
 		// module name
 		IDRefreshName: resourceId,
 
-		Providers:    testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy: testAccCheckEssVserverGroupsDestroy,
 		Steps: []resource.TestStep{
 			{

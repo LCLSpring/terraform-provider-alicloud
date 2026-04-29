@@ -31,7 +31,7 @@ func TestAccAliCloudCloudFirewallThreatIntelligenceSwitch_basic11212(t *testing.
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		Steps: []resource.TestStep{
 			{
 				Config: testAccConfig(map[string]interface{}{

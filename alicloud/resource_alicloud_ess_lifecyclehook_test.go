@@ -36,7 +36,7 @@ func TestAccAlicloudEssLifecycleHookBasic(t *testing.T) {
 
 		// module name
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  testAccCheckEssLifecycleHookDestroy,
 		Steps: []resource.TestStep{
 			{

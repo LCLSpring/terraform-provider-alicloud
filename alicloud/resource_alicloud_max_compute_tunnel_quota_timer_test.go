@@ -30,7 +30,7 @@ func SkipTestAccAliCloudMaxComputeTunnelQuotaTimer_basic9976(t *testing.T) {
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  nil,
 		Steps: []resource.TestStep{
 			{

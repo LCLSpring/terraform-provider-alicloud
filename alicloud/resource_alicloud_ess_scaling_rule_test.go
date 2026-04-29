@@ -38,7 +38,7 @@ func TestAccAliCloudEssScalingRule_basic(t *testing.T) {
 		// module name
 		IDRefreshName: resourceId,
 
-		Providers:    testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy: testAccCheckEssScalingRuleDestroy,
 		Steps: []resource.TestStep{
 			{
@@ -153,7 +153,7 @@ func TestAccAliCloudEssScalingRule_target_tracking_rule_basic(t *testing.T) {
 		},
 		// module name
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  testAccCheckEssScalingRuleDestroy,
 		Steps: []resource.TestStep{
 			{
@@ -278,7 +278,7 @@ func TestAccAliCloudEssScalingRule_target_tracking_rule_cloudMonitor(t *testing.
 		},
 		// module name
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  testAccCheckEssScalingRuleDestroy,
 		Steps: []resource.TestStep{
 			{
@@ -353,7 +353,7 @@ func TestAccAliCloudEssScalingRule_predictive_rule_basic(t *testing.T) {
 		},
 		// module name
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  testAccCheckEssScalingRuleDestroy,
 		Steps: []resource.TestStep{
 			{
@@ -460,7 +460,7 @@ func TestAccAliCloudEssScalingRule_target_tracking_rule_alarm_dimension(t *testi
 		},
 		// module name
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  testAccCheckEssScalingRuleDestroy,
 		Steps: []resource.TestStep{
 			{
@@ -530,7 +530,7 @@ func TestAccAliCloudEssScalingRule_target_tracking_rule_alarm_hybrid_metrics_upd
 		},
 		// module name
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  testAccCheckEssScalingRuleDestroy,
 		Steps: []resource.TestStep{
 			{
@@ -680,7 +680,7 @@ func TestAccAliCloudEssScalingRule_target_tracking_rule_alarm_hybrid_metrics_cre
 		},
 		// module name
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  testAccCheckEssScalingRuleDestroy,
 		Steps: []resource.TestStep{
 			{
@@ -748,7 +748,7 @@ func TestAccAliCloudEssScalingRule_step_rule_basic(t *testing.T) {
 		// module name
 		IDRefreshName: resourceId,
 
-		Providers:    testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy: testAccCheckEssScalingRuleDestroy,
 		Steps: []resource.TestStep{
 			{
@@ -838,7 +838,7 @@ func TestAccAliCloudEssScalingRuleMulti(t *testing.T) {
 		// module name
 		IDRefreshName: resourceId,
 
-		Providers:    testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy: testAccCheckEssScalingRuleDestroy,
 		Steps: []resource.TestStep{
 			{
@@ -883,7 +883,7 @@ func TestAccAliCloudEssScalingSimpleRule_minAdjustmentMagnitude(t *testing.T) {
 		// module name
 		IDRefreshName: resourceId,
 
-		Providers:    testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy: testAccCheckEssScalingRuleDestroy,
 		Steps: []resource.TestStep{
 			{
@@ -957,7 +957,7 @@ func TestAccAliCloudEssScalingStepRule_minAdjustmentMagnitude(t *testing.T) {
 		// module name
 		IDRefreshName: resourceId,
 
-		Providers:    testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy: testAccCheckEssScalingRuleDestroy,
 		Steps: []resource.TestStep{
 			{
@@ -1046,7 +1046,7 @@ func TestAccAliCloudEssScalingTargetRule_scaleInEvaluationCountAndScaleOutEvalua
 		},
 		// module name
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  testAccCheckEssScalingRuleDestroy,
 		Steps: []resource.TestStep{
 			{

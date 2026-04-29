@@ -27,7 +27,7 @@ func TestAccAliCloudCloudMonitorServiceGroupMonitoringAgentProcess_basic0(t *tes
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -107,7 +107,7 @@ func TestAccAliCloudCloudMonitorServiceGroupMonitoringAgentProcess_basic0_twin(t
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{

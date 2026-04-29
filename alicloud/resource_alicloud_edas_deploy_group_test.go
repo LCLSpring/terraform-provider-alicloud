@@ -35,7 +35,7 @@ func TestAccAlicloudEdasDeployGroup_basic(t *testing.T) {
 		},
 
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  testAccCheckEdasDeployGroupDestroy,
 		Steps: []resource.TestStep{
 			{
@@ -93,7 +93,7 @@ func TestAccAlicloudEdasDeployGroup_multi(t *testing.T) {
 		},
 
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  testAccCheckEdasDeployGroupDestroy,
 		Steps: []resource.TestStep{
 			{

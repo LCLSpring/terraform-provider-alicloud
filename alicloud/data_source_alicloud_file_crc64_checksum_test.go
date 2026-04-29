@@ -38,8 +38,8 @@ func TestAccAlicloudFileCRC64DataSourceBasic(t *testing.T) {
 		}`, path)
 
 	resource.Test(t, resource.TestCase{
-		PreCheck:  func() { testAccPreCheck(t) },
-		Providers: testAccProviders,
+		PreCheck:          func() { testAccPreCheck(t) },
+		ProviderFactories: testAccProviderFactory,
 		Steps: []resource.TestStep{
 			{
 				Config: config,

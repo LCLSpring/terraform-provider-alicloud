@@ -26,7 +26,7 @@ func TestAccAlicloudRdsInstanceCrossBackupPolicyMySql(t *testing.T) {
 			testAccPreCheckWithRegions(t, true, connectivity.RDSInstanceClassesSupportRegions)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -162,7 +162,7 @@ func TestAccAlicloudRdsInstanceCrossBackupPolicyPostgreSQL(t *testing.T) {
 			testAccPreCheckWithRegions(t, true, connectivity.RDSInstanceClassesSupportRegions)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{

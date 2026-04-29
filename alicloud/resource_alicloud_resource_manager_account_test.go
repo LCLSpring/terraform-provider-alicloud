@@ -36,7 +36,7 @@ func TestAccAliCloudResourceManagerAccount_basic0(t *testing.T) {
 			testAccPreCheckWithResourceManagerAccount(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  nil,
 		Steps: []resource.TestStep{
 			{
@@ -150,7 +150,7 @@ func TestAccAliCloudResourceManagerAccount_basic0_twin(t *testing.T) {
 			testAccPreCheckWithResourceManagerAccount(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  nil,
 		Steps: []resource.TestStep{
 			{
@@ -503,7 +503,7 @@ func TestAccAliCloudResourceManagerAccount_basic10666(t *testing.T) {
 			testAccPreCheckWithResourceManagerAccount(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  nil,
 		Steps: []resource.TestStep{
 			{
@@ -608,7 +608,7 @@ func TestAccAliCloudResourceManagerAccount_basic10666_twin(t *testing.T) {
 			testAccPreCheckWithResourceManagerAccount(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  nil,
 		Steps: []resource.TestStep{
 			{

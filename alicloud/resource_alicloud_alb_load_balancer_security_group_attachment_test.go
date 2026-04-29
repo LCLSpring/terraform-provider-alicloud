@@ -28,7 +28,7 @@ func TestAccAliCloudAlbLoadBalancerSecurityGroupAttachment_basic7120(t *testing.
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{

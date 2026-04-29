@@ -15,7 +15,7 @@ func TestAccAlicloudBrainIndustrialServiceDataSource(t *testing.T) {
 		PreCheck: func() {
 			testAccPreCheck(t)
 		},
-		Providers: testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		Steps: []resource.TestStep{
 			{
 				Config: testAccCheckAlicloudBrainIndustrialServiceDataSource,

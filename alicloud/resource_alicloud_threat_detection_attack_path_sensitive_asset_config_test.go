@@ -30,7 +30,7 @@ func TestAccAliCloudThreatDetectionAttackPathSensitiveAssetConfig_basic10276(t *
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -129,7 +129,7 @@ func TestAccAliCloudThreatDetectionAttackPathSensitiveAssetConfig_basic10276_twi
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{

@@ -37,7 +37,7 @@ func TestAccAliCloudNasAccessRule_basic(t *testing.T) {
 		},
 
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -467,7 +467,7 @@ func TestAccAliCloudNasAccessRule_basic5737(t *testing.T) {
 			testAccPreCheckWithRegions(t, true, connectivity.NasExtremeTypeRegions)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -637,7 +637,7 @@ func TestAccAliCloudNasAccessRule_basic5736(t *testing.T) {
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -756,7 +756,7 @@ func TestAccAliCloudNasAccessRule_basic5737_twin(t *testing.T) {
 			testAccPreCheckWithRegions(t, true, connectivity.NasExtremeTypeRegions)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -807,7 +807,7 @@ func TestAccAliCloudNasAccessRule_basic5736_twin(t *testing.T) {
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{

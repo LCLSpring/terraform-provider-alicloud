@@ -30,7 +30,7 @@ func TestAccAliCloudThreatDetectionAssetSelectionConfig_basic9090(t *testing.T) 
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		Steps: []resource.TestStep{
 			{
 				Config: testAccConfig(map[string]interface{}{

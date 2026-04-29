@@ -28,7 +28,7 @@ func TestAccAliCloudExpressConnectRouterExpressConnectRouterVpcAssociation_basic
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -159,7 +159,7 @@ func TestAccAliCloudExpressConnectRouterExpressConnectRouterVpcAssociation_basic
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -209,7 +209,7 @@ func TestAccAliCloudExpressConnectRouterExpressConnectRouterVpcAssociation_basic
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{

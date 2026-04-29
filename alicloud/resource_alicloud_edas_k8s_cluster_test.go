@@ -124,7 +124,7 @@ func TestAccAlicloudEdasK8sCluster_basic(t *testing.T) {
 		},
 
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  testAccCheckEdasK8sClusterDestroy,
 		Steps: []resource.TestStep{
 			{

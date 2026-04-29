@@ -28,7 +28,7 @@ func TestAccAliCloudEssServerGroupAttachment_basic_alb(t *testing.T) {
 		// module name
 		IDRefreshName: resourceId,
 
-		Providers:    testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy: testAccCheckEssServerGroupsDestroy,
 		Steps: []resource.TestStep{
 			{
@@ -81,7 +81,7 @@ func TestAccAliCloudEssServerGroupAttachment_nonForceAttach_alb(t *testing.T) {
 		// module name
 		IDRefreshName: resourceId,
 
-		Providers:    testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy: testAccCheckEssServerGroupsDestroy,
 		Steps: []resource.TestStep{
 			{
@@ -134,7 +134,7 @@ func TestAccAliCloudEssServerGroupAttachment_basic_nlb(t *testing.T) {
 		// module name
 		IDRefreshName: resourceId,
 
-		Providers:    testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy: testAccCheckEssServerGroupsDestroy,
 		Steps: []resource.TestStep{
 			{
@@ -187,7 +187,7 @@ func TestAccAliCloudEssServerGroupAttachment_nonForceAttach_nlb(t *testing.T) {
 		// module name
 		IDRefreshName: resourceId,
 
-		Providers:    testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy: testAccCheckEssServerGroupsDestroy,
 		Steps: []resource.TestStep{
 			{
@@ -240,7 +240,7 @@ func TestAccAliCloudEssServerGroupAttachment_nonForceAttach_mutil(t *testing.T) 
 		// module name
 		IDRefreshName: resourceId,
 
-		Providers:    testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy: testAccCheckEssServerGroupsDestroy,
 		Steps: []resource.TestStep{
 			{

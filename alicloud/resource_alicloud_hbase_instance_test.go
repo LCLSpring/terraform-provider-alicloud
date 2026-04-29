@@ -167,7 +167,7 @@ func TestAccAliCloudHBaseInstanceVpc(t *testing.T) {
 
 		IDRefreshName: resourceId,
 
-		Providers:    testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy: rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -435,7 +435,7 @@ func TestAccAliCloudHBaseInstance_VpcId(t *testing.T) {
 
 		IDRefreshName: resourceId,
 
-		Providers:    testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy: rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{

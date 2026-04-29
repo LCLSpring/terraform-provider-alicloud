@@ -30,7 +30,7 @@ func TestAccAliCloudCloudMonitorServiceEnterprisePublic_basic5536(t *testing.T) 
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{

@@ -125,7 +125,7 @@ func TestAccAliCloudEventBridgeEventSource_basic0(t *testing.T) {
 			testAccPreCheckWithRegions(t, true, connectivity.EventBridgeSupportRegions)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -203,7 +203,7 @@ func TestAccAliCloudEventBridgeEventSource_basic0_twin(t *testing.T) {
 			testAccPreCheckWithRegions(t, true, connectivity.EventBridgeSupportRegions)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{

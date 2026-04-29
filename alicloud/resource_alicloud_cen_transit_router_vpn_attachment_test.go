@@ -37,7 +37,7 @@ func TestAccAliCloudCENTransitRouterVpnAttachment_basic0(t *testing.T) {
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -106,7 +106,7 @@ func TestAccAliCloudCENTransitRouterVpnAttachment_zoneMismatch(t *testing.T) {
 		// IDRefreshName is intentionally omitted: the attachment is never
 		// created (Create is expected to fail), so SDK's refresh probe on
 		// that ID would report "ID-only refresh check never ran.".
-		Providers:    testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy: nil,
 		Steps: []resource.TestStep{
 			{
@@ -407,7 +407,7 @@ func TestAccAliCloudCENTransitRouterVpnAttachment_basic1(t *testing.T) {
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -788,7 +788,7 @@ func TestAccAliCloudCenTransitRouterVpnAttachment_basic10332(t *testing.T) {
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -1009,7 +1009,7 @@ func TestAccAliCloudCenTransitRouterVpnAttachment_basic10409(t *testing.T) {
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{

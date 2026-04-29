@@ -14,7 +14,7 @@ import (
 
 func dataSourceAlicloudEaisInstances() *schema.Resource {
 	return &schema.Resource{
-		Read: dataSourceAlicloudEaisInstancesRead,
+		Read:               dataSourceAlicloudEaisInstancesRead,
 		DeprecationMessage: "This resource has been deprecated since v1.278.0.",
 		Schema: map[string]*schema.Schema{
 			"ids": {

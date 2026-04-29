@@ -29,7 +29,7 @@ func TestAccAliCloudCloudFirewallNatFirewall_basic6822(t *testing.T) {
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -213,7 +213,7 @@ func TestAccAliCloudCloudFirewallNatFirewall_basic6822_twin(t *testing.T) {
 			//testAccPreCheckWithRegions(t, true, []connectivity.Region{"cn-shenzhen"})
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -285,7 +285,7 @@ func TestAccAliCloudCloudFirewallNatFirewall_basic6822_raw(t *testing.T) {
 			//testAccPreCheckWithRegions(t, true, []connectivity.Region{"cn-shenzhen"})
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{

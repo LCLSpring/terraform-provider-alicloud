@@ -45,7 +45,7 @@ func TestAccAliCloudRdsDBProxy_Public_MySQL(t *testing.T) {
 
 		IDRefreshName: resourceId,
 
-		Providers:    testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy: nil,
 
 		Steps: []resource.TestStep{
@@ -115,7 +115,7 @@ func TestAccAliCloudRdsDBProxy_Public_MySQL_Update(t *testing.T) {
 
 		IDRefreshName: resourceId,
 
-		Providers:    testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy: nil,
 
 		Steps: []resource.TestStep{

@@ -29,7 +29,7 @@ func TestAccAliCloudClickHouseEnterpriseDbClusterBackupPolicy_basic10564(t *test
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{

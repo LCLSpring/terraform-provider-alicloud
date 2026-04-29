@@ -111,7 +111,7 @@ func TestAccAliCloudEdgeKubernetes_basic(t *testing.T) {
 		},
 		// module name
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  resourceAttrCheck.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -227,7 +227,7 @@ func TestAccAliCloudEdgeKubernetes_essd(t *testing.T) {
 		},
 		// module name
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  resourceAttrCheck.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -380,7 +380,7 @@ func TestAccAliCloudEdgeKubernetes_pro(t *testing.T) {
 		},
 		// module name
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  resourceAttrCheck.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{

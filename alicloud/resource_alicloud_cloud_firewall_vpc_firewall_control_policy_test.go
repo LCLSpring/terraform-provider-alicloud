@@ -347,7 +347,7 @@ func TestAccAliCloudCloudFirewallVpcFirewallControlPolicy_basic_no_order(t *test
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -409,7 +409,7 @@ func TestAccAliCloudCloudFirewallVpcFirewallControlPolicy_basic11929(t *testing.
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -629,7 +629,7 @@ func TestAccAliCloudCloudFirewallVpcFirewallControlPolicy_basic11929_twin0(t *te
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -712,7 +712,7 @@ func TestAccAliCloudCloudFirewallVpcFirewallControlPolicy_basic11929_twin1(t *te
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -840,7 +840,7 @@ func TestAccAliCloudCloudFirewallVpcFirewallControlPolicy_basic12022(t *testing.
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -1060,7 +1060,7 @@ func TestAccAliCloudCloudFirewallVpcFirewallControlPolicy_basic12022_twin0(t *te
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -1143,7 +1143,7 @@ func TestAccAliCloudCloudFirewallVpcFirewallControlPolicy_basic12022_twin1(t *te
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{

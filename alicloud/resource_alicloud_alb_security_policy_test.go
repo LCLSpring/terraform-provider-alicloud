@@ -129,7 +129,7 @@ func TestAccAlicloudALBSecurityPolicy_basic0(t *testing.T) {
 			testAccPreCheckWithRegions(t, true, connectivity.AlbSupportRegions)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -246,7 +246,7 @@ func TestAccAlicloudALBSecurityPolicy_basic1(t *testing.T) {
 			testAccPreCheckWithRegions(t, true, connectivity.AlbSupportRegions)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{

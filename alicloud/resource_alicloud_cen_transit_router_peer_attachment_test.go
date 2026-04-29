@@ -1020,7 +1020,7 @@ func SkipTestAccAliCloudCenTransitRouterPeerAttachment_basic6600_twin(t *testing
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{

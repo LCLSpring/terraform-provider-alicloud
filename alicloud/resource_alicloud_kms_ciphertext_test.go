@@ -11,7 +11,7 @@ import (
 func TestAccAlicloudKMSCiphertext_basic(t *testing.T) {
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:     func() { testAccPreCheck(t) },
-		Providers:    testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy: nil,
 		Steps: []resource.TestStep{
 			{
@@ -29,7 +29,7 @@ func TestAccAlicloudKMSCiphertext_validate(t *testing.T) {
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:     func() { testAccPreCheck(t) },
-		Providers:    testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy: nil,
 		Steps: []resource.TestStep{
 			{
@@ -46,7 +46,7 @@ func TestAccAlicloudKMSCiphertext_validate(t *testing.T) {
 func TestAccAlicloudKMSCiphertext_validate_withContext(t *testing.T) {
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:     func() { testAccPreCheck(t) },
-		Providers:    testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy: nil,
 		Steps: []resource.TestStep{
 			{

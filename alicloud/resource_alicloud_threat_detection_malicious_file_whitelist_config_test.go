@@ -28,7 +28,7 @@ func TestAccAliCloudThreatDetectionMaliciousFileWhitelistConfig_basic4979(t *tes
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -345,7 +345,7 @@ func TestAccAliCloudThreatDetectionMaliciousFileWhitelistConfig_basic4979_twin(t
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{

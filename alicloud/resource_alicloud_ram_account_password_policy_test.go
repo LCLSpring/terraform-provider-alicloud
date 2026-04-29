@@ -29,7 +29,7 @@ func TestAccAlicloudRAMAccountPasswordPolicy_basic(t *testing.T) {
 
 		// module name
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  testAccCheckRamAccountPasswordPolicyDestroy,
 
 		Steps: []resource.TestStep{

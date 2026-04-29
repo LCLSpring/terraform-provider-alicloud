@@ -29,7 +29,7 @@ func TestAccAliCloudArmsSyntheticTask_basic5711(t *testing.T) {
 			testAccPreCheckWithRegions(t, true, connectivity.ARMSSyncTaskSupportRegions)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -1029,7 +1029,7 @@ func TestAccAliCloudArmsSyntheticTask_basic5711_twin(t *testing.T) {
 			testAccPreCheckWithRegions(t, true, connectivity.ARMSSyncTaskSupportRegions)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{

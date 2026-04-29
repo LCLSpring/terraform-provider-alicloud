@@ -30,7 +30,7 @@ func TestAccAliCloudResourceManagerMultiAccountDeliveryChannel_basic7679(t *test
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{

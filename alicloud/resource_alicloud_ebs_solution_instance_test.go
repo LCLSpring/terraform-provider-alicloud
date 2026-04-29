@@ -29,7 +29,7 @@ func TestAccAliCloudEbsSolutionInstance_basic5796(t *testing.T) {
 			testAccPreCheckWithRegions(t, true, []connectivity.Region{connectivity.Shanghai})
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -325,7 +325,7 @@ func TestAccAliCloudEbsSolutionInstance_basic5796_twin(t *testing.T) {
 			testAccPreCheckWithRegions(t, true, []connectivity.Region{connectivity.Shanghai})
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{

@@ -42,7 +42,7 @@ func TestAccAlicloudOssBucketObject_basic(t *testing.T) {
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  testAccCheckAlicloudOssBucketObjectDestroy,
 		Steps: []resource.TestStep{
 			{

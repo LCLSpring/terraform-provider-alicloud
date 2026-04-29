@@ -116,7 +116,7 @@ func TestAccAlicloudVPCNetworkAclAttachment_basic(t *testing.T) {
 		},
 		// module name
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  testAccCheckNetworkAclAttachmentDestroy,
 		Steps: []resource.TestStep{
 			{

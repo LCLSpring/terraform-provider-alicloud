@@ -28,7 +28,7 @@ func TestAccAliCloudExpressConnectRouterGrantAssociation_basic9639(t *testing.T)
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{

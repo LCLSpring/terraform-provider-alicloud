@@ -29,7 +29,7 @@ func TestAccAliCloudClickHouseEnterpriseDbClusterPublicEndpoint_basic10561(t *te
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{

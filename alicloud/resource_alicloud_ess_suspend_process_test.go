@@ -28,7 +28,7 @@ func TestAccAliCloudEssAlbServerGroupSuspendProcess(t *testing.T) {
 		// module name
 		IDRefreshName: resourceId,
 
-		Providers:    testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy: testAccCheckEssSuspendProcessDestroy,
 		Steps: []resource.TestStep{
 			{

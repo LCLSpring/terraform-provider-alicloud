@@ -16,7 +16,7 @@ func TestAccAlicloudCloudSSOServiceDataSource(t *testing.T) {
 			testAccPreCheck(t)
 			testAccPreCheckEnterpriseAccountEnabled(t)
 		},
-		Providers: testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		Steps: []resource.TestStep{
 			{
 				Config: testAccCheckAlicloudCloudSsoServiceDataOnSource,

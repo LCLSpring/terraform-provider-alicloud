@@ -145,7 +145,7 @@ func TestAccAlicloudIMMProject_basic0(t *testing.T) {
 			testAccPreCheckWithRegions(t, true, connectivity.IMMSupportRegions)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{

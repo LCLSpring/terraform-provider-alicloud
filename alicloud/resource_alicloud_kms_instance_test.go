@@ -27,7 +27,7 @@ func TestAccAliCloudKmsInstance_basic4048(t *testing.T) {
 			testAccPreCheckWithRegions(t, true, connectivity.KmsInstanceSupportRegions)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -439,7 +439,7 @@ func TestAccAliCloudKmsInstance_basic4048_twin(t *testing.T) {
 			testAccPreCheckWithRegions(t, true, connectivity.KmsInstanceSupportRegions)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -558,7 +558,7 @@ func TestAccAliCloudKmsInstance_basic4048_postpaid(t *testing.T) {
 			testAccPreCheckWithRegions(t, true, connectivity.KmsInstanceSupportRegions)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -690,7 +690,7 @@ func TestAccAliCloudKmsInstance_basic4048_postpaid_intl(t *testing.T) {
 			testAccPreCheckWithAccountSiteType(t, IntlSite)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -795,7 +795,7 @@ func TestAccAliCloudKmsInstance_basic4048_intl(t *testing.T) {
 			testAccPreCheckWithAccountSiteType(t, IntlSite)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -951,7 +951,7 @@ func TestAccAliCloudKmsInstance_basic5405(t *testing.T) {
 			testAccPreCheckWithAccountSiteType(t, IntlSite)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -1172,7 +1172,7 @@ func TestAccAliCloudKmsInstance_basic5405_twin(t *testing.T) {
 			testAccPreCheckWithAccountSiteType(t, IntlSite)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -1240,7 +1240,7 @@ func TestAccAliCloudKmsInstance_postpaid_log_enabled(t *testing.T) {
 			testAccPreCheckWithRegions(t, true, []connectivity.Region{"cn-wulanchabu"})
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{

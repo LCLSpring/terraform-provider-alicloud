@@ -128,7 +128,7 @@ func TestAccAliCloudVpcPublicIpAddressPool_basic0(t *testing.T) {
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -186,7 +186,7 @@ func TestAccAliCloudVpcPublicIpAddressPool_basic1(t *testing.T) {
 			testAccPreCheckWithRegions(t, true, []connectivity.Region{"ap-northeast-2"})
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
@@ -535,7 +535,7 @@ func TestAccAliCloudVpcPublicIpAddressPool_basic2534(t *testing.T) {
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
+		ProviderFactories: testAccProviderFactory,
 		CheckDestroy:  rac.checkResourceDestroy(),
 		Steps: []resource.TestStep{
 			{
