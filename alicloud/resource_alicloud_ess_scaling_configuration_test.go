@@ -1762,14 +1762,16 @@ func resourceEssScalingConfigurationConfigDependences(name string) string {
 	}
 
 	data "alicloud_images" "default1" {
-		name_regex  = "^debian"
-  		most_recent = true
-  		owners      = "system"
+		name_regex    = "^debian"
+  		most_recent   = true
+  		owners        = "system"
+  		instance_type = "${data.alicloud_instance_types.c6.instance_types.0.id}"
 	}
 	data "alicloud_images" "default2" {
-		name_regex  = "^aliyun"
-  		most_recent = true
-  		owners      = "system"
+		name_regex    = "^aliyun"
+  		most_recent   = true
+  		owners        = "system"
+  		instance_type = "${data.alicloud_instance_types.c6.instance_types.0.id}"
 	}
 	data "alicloud_instance_types" "t5" {
       instance_type_family = "ecs.t5"
@@ -1778,8 +1780,9 @@ func resourceEssScalingConfigurationConfigDependences(name string) string {
       instance_type_family = "ecs.t6"
 	}
     data "alicloud_instance_types" "c6" {
-      
 	  availability_zone = "${data.alicloud_zones.default.zones.0.id}"
+	  cpu_core_count    = 2
+	  memory_size       = 4
 	}
 	 data "alicloud_instance_types" "default12" {
       instance_type_family = "ecs.n4"
@@ -1858,14 +1861,10 @@ func resourceEssScalingConfigurationConfigDependences_beijing(name string) strin
 	}
 
 	data "alicloud_images" "default1" {
-		name_regex  = "^ubu"
-  		most_recent = true
-  		owners      = "system"
-	}
-	data "alicloud_images" "default2" {
-		name_regex  = "^aliyun"
-  		most_recent = true
-  		owners      = "system"
+		name_regex    = "^ubu"
+  		most_recent   = true
+  		owners        = "system"
+  		instance_type = "${data.alicloud_instance_types.t6.instance_types.0.id}"
 	}
     resource "alicloud_vswitch" "default1" {
   		vpc_id            = "${alicloud_vpc.default.id}"
@@ -1877,11 +1876,19 @@ func resourceEssScalingConfigurationConfigDependences_beijing(name string) strin
       instance_type_family = "ecs.t5"
 	}
     data "alicloud_instance_types" "t6" {
-      instance_type_family = "ecs.t5"
+      availability_zone    = "cn-beijing-f"
+      instance_type_family = "ecs.t6"
 	}
     data "alicloud_instance_types" "c6" {
-      
 	  availability_zone = "cn-beijing-f"
+	  cpu_core_count    = 2
+	  memory_size       = 4
+	}
+	data "alicloud_images" "default2" {
+		name_regex    = "^aliyun"
+  		most_recent   = true
+  		owners        = "system"
+  		instance_type = "${data.alicloud_instance_types.c6.instance_types.0.id}"
 	}
 	 data "alicloud_instance_types" "default12" {
       instance_type_family = "ecs.n4"
@@ -1965,16 +1972,18 @@ func resourceEssScalingConfigurationConfigDependence(name string) string {
   		owners      = "system"
 	}
 	data "alicloud_images" "default2" {
-		name_regex  = "^debian"
-  		most_recent = true
-  		owners      = "system"
+		name_regex    = "^debian"
+  		most_recent   = true
+  		owners        = "system"
+  		instance_type = "${data.alicloud_instance_types.c6.instance_types.0.id}"
 	}
 	data "alicloud_instance_types" "t5" {
       instance_type_family = "ecs.t5"
 	}
     data "alicloud_instance_types" "c6" {
-      
 	  availability_zone = "${data.alicloud_zones.default.zones.0.id}"
+	  cpu_core_count    = 2
+	  memory_size       = 4
 	}
 	 data "alicloud_instance_types" "default12" {
       instance_type_family = "ecs.n4"
@@ -2012,16 +2021,18 @@ func resourceEssScalingConfigurationConfigDependenceOnlyInstancePatternInfo(name
   		owners      = "system"
 	}
 	data "alicloud_images" "default2" {
-		name_regex  = "^debian"
-  		most_recent = true
-  		owners      = "system"
+		name_regex    = "^debian"
+  		most_recent   = true
+  		owners        = "system"
+  		instance_type = "${data.alicloud_instance_types.c6.instance_types.0.id}"
 	}
 	data "alicloud_instance_types" "t5" {
       instance_type_family = "ecs.t5"
 	}
     data "alicloud_instance_types" "c6" {
-      
 	  availability_zone = "${data.alicloud_zones.default.zones.0.id}"
+	  cpu_core_count    = 2
+	  memory_size       = 4
 	}
 	 data "alicloud_instance_types" "default12" {
       instance_type_family = "ecs.n4"
@@ -2109,12 +2120,15 @@ func resourceEssScalingConfigurationConfigMutilDependence(name string) string {
 	}
 
 	data "alicloud_images" "default1" {
-		name_regex  = "^debian"
-  		most_recent = true
-  		owners      = "system"
+		name_regex    = "^debian"
+  		most_recent   = true
+  		owners        = "system"
+  		instance_type = "${data.alicloud_instance_types.c6.instance_types.0.id}"
 	}
     data "alicloud_instance_types" "c6" {
 	  availability_zone = "${data.alicloud_zones.default.zones.0.id}"
+	  cpu_core_count    = 2
+	  memory_size       = 4
 	}
 	resource "alicloud_ess_scaling_group" "default" {
 		min_size = 1
