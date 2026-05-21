@@ -10,7 +10,7 @@ description: |-
 
 Provides a VPC Ipv6 Cidr Block resource.
 
-VPC IPv6 additional network segment.
+VPC IPv6 supplementary CIDR block.
 
 For information about VPC Ipv6 Cidr Block and how to use it, see [What is Ipv6 Cidr Block](https://next.api.alibabacloud.com/document/Vpc/2016-04-28/AssociateVpcCidrBlock).
 
@@ -60,30 +60,36 @@ resource "alicloud_vpc_ipv6_cidr_block" "default" {
 ## Argument Reference
 
 The following arguments are supported:
-* `ipv6_cidr_block` - (Optional, ForceNew, Computed) The IPv6 network segment of the VPC.
-* `ipv6_cidr_mask` - (Optional, Int) Add an IPv6 CIDR block from the IPAM pool to the VPC by entering a mask.
+* `ipv6_cidr_block` - (Optional, ForceNew, Computed) The additional IPv6 CIDR block to be removed.
+
+-> **NOTE:**  You must specify either the `Ipv6CidrBlock` parameter or the `SecondaryCidrBlock` parameter, but not both.
+
+* `ipv6_cidr_mask` - (Optional, Int) Add an IPv6 CIDR block to the VPC from an IPAM pool by specifying a subnet mask.
+
+-> **NOTE:**  When adding an additional IPv6 CIDR block to a VPC from an IPAM pool, you must specify at least one of the `Ipv6CidrBlock` or `Ipv6CidrMask` parameters.
+
 
 -> **NOTE:** This parameter is immutable. Changing it after creation has no effect.
 
-* `ipv6_ipam_pool_id` - (Optional) The ID of the IP Address Manager (IPAM) pool that contains IPv6 addresses.
+* `ipv6_ipam_pool_id` - (Optional) The ID of the IPAM pool instance.
 
 -> **NOTE:** This parameter is immutable. Changing it after creation has no effect.
 
-* `ipv6_isp` - (Optional, ForceNew) The IPv6 address segment type of the VPC. Value:
+* `ipv6_isp` - (Optional, ForceNew) The IPv6 CIDR block type of the VPC. Valid values:
   - `BGP` (default): Alibaba Cloud BGP IPv6.
-  - `ChinaMobile`: China Mobile (single line).
-  - `ChinaUnicom`: China Unicom (single line).
-  - `ChinaTelecom`: China Telecom (single line).
+  - `ChinaMobile`: China Mobile (single-line).
+  - `ChinaUnicom`: China Unicom (single-line).
+  - `ChinaTelecom`: China Telecom (single-line).
 
--> **NOTE:**  If a single-line bandwidth whitelist is enabled, the field can be set to `ChinaTelecom` (China Telecom), `ChinaUnicom` (China Unicom), and `ChinaMobile` (China Mobile).
+-> **NOTE:**  If you are a user who has been granted access to single-line bandwidth through a whitelist, you can set this parameter to `ChinaTelecom` (China Telecom), `ChinaUnicom` (China Unicom), or `ChinaMobile` (China Mobile).
 
 * `vpc_id` - (Required, ForceNew) The ID of the VPC.
+You can specify up to 20 VPC IDs, separated by commas (,).
 
 ## Attributes Reference
 
 The following attributes are exported:
 * `id` - The ID of the resource supplied above. The value is formulated as `<vpc_id>#<ipv6_cidr_block>`.
-* `region_id` - The ID of the region where the VPC resides.
 
 ## Timeouts
 

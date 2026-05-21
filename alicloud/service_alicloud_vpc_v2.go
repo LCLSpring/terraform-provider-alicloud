@@ -2460,6 +2460,7 @@ func (s *VpcServiceV2) VpcRouteEntryStateRefreshFunc(id string, field string, fa
 }
 
 // DescribeVpcRouteEntry >>> Encapsulated.
+
 // DescribeVpcIpv6CidrBlock <<< Encapsulated get interface for Vpc Ipv6CidrBlock.
 
 func (s *VpcServiceV2) DescribeVpcIpv6CidrBlock(id string) (object map[string]interface{}, err error) {
@@ -2476,14 +2477,14 @@ func (s *VpcServiceV2) DescribeVpcIpv6CidrBlock(id string) (object map[string]in
 	query = make(map[string]interface{})
 	request["VpcId"] = parts[0]
 	request["RegionId"] = client.RegionId
-	action := "DescribeVpcs"
+	action := "DescribeVpcAttribute"
 
 	wait := incrementalWait(3*time.Second, 5*time.Second)
 	err = resource.Retry(1*time.Minute, func() *resource.RetryError {
 		response, err = client.RpcPost("Vpc", "2016-04-28", action, query, request, true)
 
 		if err != nil {
-			if NeedRetry(err) {
+			if IsExpectedErrors(err, []string{"LastTokenProcessing", "OperationConflict", "SystemBusy", "ServiceUnavailable", "IncorrectStatus"}) || NeedRetry(err) {
 				wait()
 				return resource.RetryableError(err)
 			}
@@ -2496,9 +2497,9 @@ func (s *VpcServiceV2) DescribeVpcIpv6CidrBlock(id string) (object map[string]in
 		return object, WrapErrorf(err, DefaultErrorMsg, id, action, AlibabaCloudSdkGoERROR)
 	}
 
-	v, err := jsonpath.Get("$.Vpcs.Vpc[*]", response)
+	v, err := jsonpath.Get("$.Ipv6CidrBlocks.Ipv6CidrBlock[*]", response)
 	if err != nil {
-		return object, WrapErrorf(err, FailedGetAttributeMsg, id, "$.Vpcs.Vpc[*]", response)
+		return object, WrapErrorf(err, FailedGetAttributeMsg, id, "$.Ipv6CidrBlocks.Ipv6CidrBlock[*]", response)
 	}
 
 	if len(v.([]interface{})) == 0 {
@@ -2508,20 +2509,10 @@ func (s *VpcServiceV2) DescribeVpcIpv6CidrBlock(id string) (object map[string]in
 	result, _ := v.([]interface{})
 	for _, v := range result {
 		item := v.(map[string]interface{})
-		ipv6CidrBlocks, err := jsonpath.Get("$.Ipv6CidrBlocks.Ipv6CidrBlock[*]", item)
-		if err != nil {
-			return object, WrapErrorf(err, FailedGetAttributeMsg, id, "$.Ipv6CidrBlocks.Ipv6CidrBlock[*]", item)
+		if fmt.Sprint(item["Ipv6CidrBlock"]) != parts[1] {
+			continue
 		}
-		found := false
-		for _, vv := range ipv6CidrBlocks.([]interface{}) {
-			if vv.(map[string]interface{})["Ipv6CidrBlock"] == parts[1] {
-				found = true
-				break
-			}
-		}
-		if found {
-			return item, nil
-		}
+		return item, nil
 	}
 	return object, WrapErrorf(NotFoundErr("Ipv6CidrBlock", id), NotFoundMsg, response)
 }

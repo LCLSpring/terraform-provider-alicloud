@@ -7,7 +7,6 @@ import (
 	"strings"
 	"time"
 
-	"github.com/PaesslerAG/jsonpath"
 	"github.com/aliyun/terraform-provider-alicloud/alicloud/connectivity"
 	"github.com/hashicorp/terraform-plugin-sdk/helper/resource"
 	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
@@ -43,14 +42,9 @@ func resourceAliCloudVpcIpv6CidrBlock() *schema.Resource {
 				Optional: true,
 			},
 			"ipv6_isp": {
-				Type:         schema.TypeString,
-				Optional:     true,
-				ForceNew:     true,
-				ValidateFunc: StringInSlice([]string{"ChinaMobile", "ChinaUnicom", "BGP"}, false),
-			},
-			"region_id": {
 				Type:     schema.TypeString,
-				Computed: true,
+				Optional: true,
+				ForceNew: true,
 			},
 			"vpc_id": {
 				Type:     schema.TypeString,
@@ -126,17 +120,11 @@ func resourceAliCloudVpcIpv6CidrBlockRead(d *schema.ResourceData, meta interface
 		return WrapError(err)
 	}
 
-	d.Set("region_id", objectRaw["RegionId"])
-	d.Set("vpc_id", objectRaw["VpcId"])
+	d.Set("ipv6_isp", objectRaw["Ipv6Isp"])
+	d.Set("ipv6_cidr_block", objectRaw["Ipv6CidrBlock"])
 
-	ipv6CidrBlockRawObj, _ := jsonpath.Get("$.Ipv6CidrBlocks.Ipv6CidrBlock[*]", objectRaw)
-	ipv6CidrBlockRaw := make([]interface{}, 0)
-	if ipv6CidrBlockRawObj != nil {
-		ipv6CidrBlockRaw = convertToInterfaceArray(ipv6CidrBlockRawObj)
-	}
-
-	d.Set("ipv6_isp", ipv6CidrBlockRaw["Ipv6Isp"])
-	d.Set("ipv6_cidr_block", ipv6CidrBlockRaw["Ipv6CidrBlock"])
+	parts := strings.Split(d.Id(), "#")
+	d.Set("vpc_id", parts[0])
 
 	return nil
 }

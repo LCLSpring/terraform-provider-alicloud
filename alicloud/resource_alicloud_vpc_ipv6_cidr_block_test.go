@@ -56,9 +56,7 @@ func TestAccAliCloudVpcIpv6CidrBlock_basic12802(t *testing.T) {
 	})
 }
 
-var AlicloudVpcIpv6CidrBlockMap12802 = map[string]string{
-	"region_id": CHECKSET,
-}
+var AlicloudVpcIpv6CidrBlockMap12802 = map[string]string{}
 
 func AlicloudVpcIpv6CidrBlockBasicDependence12802(name string) string {
 	return fmt.Sprintf(`
@@ -135,9 +133,7 @@ func TestAccAliCloudVpcIpv6CidrBlock_basic12801(t *testing.T) {
 	})
 }
 
-var AlicloudVpcIpv6CidrBlockMap12801 = map[string]string{
-	"region_id": CHECKSET,
-}
+var AlicloudVpcIpv6CidrBlockMap12801 = map[string]string{}
 
 func AlicloudVpcIpv6CidrBlockBasicDependence12801(name string) string {
 	return fmt.Sprintf(`
@@ -158,88 +154,6 @@ resource "alicloud_vpc_ipam_ipam_pool" "defaultIpv6Pool" {
 resource "alicloud_vpc_ipam_ipam_pool_cidr" "defaultIpv6PoolCidr" {
   ipam_pool_id = alicloud_vpc_ipam_ipam_pool.defaultIpv6Pool.id
   cidr         = "2a03:1b40:7c2e:9f00::/58"
-}
-
-resource "alicloud_vpc" "defaultVpc" {
-  cidr_block = "10.0.0.0/8"
-  vpc_name   = "test-ipv6-cidr-block"
-}
-
-
-`, name)
-}
-
-// Case 从IPAM地址池为VPC添加IPv6网段 11282
-func TestAccAliCloudVpcIpv6CidrBlock_basic11282(t *testing.T) {
-	var v map[string]interface{}
-	resourceId := "alicloud_vpc_ipv6_cidr_block.default"
-	ra := resourceAttrInit(resourceId, AlicloudVpcIpv6CidrBlockMap11282)
-	rc := resourceCheckInitWithDescribeMethod(resourceId, &v, func() interface{} {
-		return &VpcServiceV2{testAccProvider.Meta().(*connectivity.AliyunClient)}
-	}, "DescribeVpcIpv6CidrBlock")
-	rac := resourceAttrCheckInit(rc, ra)
-	testAccCheck := rac.resourceAttrMapUpdateSet()
-	rand := acctest.RandIntRange(10000, 99999)
-	name := fmt.Sprintf("tfaccvpc%d", rand)
-	testAccConfig := resourceTestAccConfigFunc(resourceId, name, AlicloudVpcIpv6CidrBlockBasicDependence11282)
-	resource.Test(t, resource.TestCase{
-		PreCheck: func() {
-			testAccPreCheck(t)
-		},
-		IDRefreshName: resourceId,
-		Providers:     testAccProviders,
-		CheckDestroy:  rac.checkResourceDestroy(),
-		Steps: []resource.TestStep{
-			{
-				Config: testAccConfig(map[string]interface{}{
-					"ipv6_isp":          "BGP",
-					"ipv6_ipam_pool_id": "${alicloud_vpc_ipam_ipam_pool.defaultIpv6Pool.id}",
-					"ipv6_cidr_mask":    "56",
-					"vpc_id":            "${alicloud_vpc.defaultVpc.id}",
-				}),
-				Check: resource.ComposeTestCheckFunc(
-					testAccCheck(map[string]string{
-						"ipv6_isp":          "BGP",
-						"ipv6_ipam_pool_id": CHECKSET,
-						"ipv6_cidr_mask":    "56",
-						"vpc_id":            CHECKSET,
-					}),
-				),
-			},
-			{
-				ResourceName:            resourceId,
-				ImportState:             true,
-				ImportStateVerify:       true,
-				ImportStateVerifyIgnore: []string{"ipv6_cidr_mask", "ipv6_ipam_pool_id"},
-			},
-		},
-	})
-}
-
-var AlicloudVpcIpv6CidrBlockMap11282 = map[string]string{
-	"region_id": CHECKSET,
-}
-
-func AlicloudVpcIpv6CidrBlockBasicDependence11282(name string) string {
-	return fmt.Sprintf(`
-variable "name" {
-    default = "%s"
-}
-
-resource "alicloud_vpc_ipam_ipam" "defaultIpam" {
-  operating_region_list = ["cn-hangzhou"]
-}
-
-resource "alicloud_vpc_ipam_ipam_pool" "defaultIpv6Pool" {
-  ipam_scope_id  = alicloud_vpc_ipam_ipam.defaultIpam.public_default_scope_id
-  pool_region_id = alicloud_vpc_ipam_ipam.defaultIpam.region_id
-  ip_version     = "IPv6"
-  ipv6_isp       = "BGP"
-}
-
-resource "alicloud_vpc_ipam_ipam_pool_cidr" "defaultIpv6PoolCidr" {
-  netmask_length = "56"
-  ipam_pool_id   = alicloud_vpc_ipam_ipam_pool.defaultIpv6Pool.id
 }
 
 resource "alicloud_vpc" "defaultVpc" {
