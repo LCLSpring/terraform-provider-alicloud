@@ -1461,22 +1461,21 @@ func TestAccAliCloudVpcVpc_basic3113_twin(t *testing.T) {
 }
 
 // Test Vpc Vpc. >>> Resource test cases, automatically generated.
-// Case 从IPAM地址池创建VPC及添加附加网段 9656
-func TestAccAliCloudVpcVpc_basic9656(t *testing.T) {
+// Case 从IPAM地址池创建VPC IPv6网段 11277
+func TestAccAliCloudVpcVpc_basic11277(t *testing.T) {
 	var v map[string]interface{}
 	resourceId := "alicloud_vpc.default"
-	ra := resourceAttrInit(resourceId, AlicloudVpcVpcMap9656)
+	ra := resourceAttrInit(resourceId, AlicloudVpcVpcMap11277)
 	rc := resourceCheckInitWithDescribeMethod(resourceId, &v, func() interface{} {
 		return &VpcServiceV2{testAccProvider.Meta().(*connectivity.AliyunClient)}
 	}, "DescribeVpcVpc")
 	rac := resourceAttrCheckInit(rc, ra)
 	testAccCheck := rac.resourceAttrMapUpdateSet()
 	rand := acctest.RandIntRange(10000, 99999)
-	name := fmt.Sprintf("tf-testacc%svpcvpc%d", defaultRegionToTest, rand)
-	testAccConfig := resourceTestAccConfigFunc(resourceId, name, AlicloudVpcVpcBasicDependence9656)
+	name := fmt.Sprintf("tfaccvpc%d", rand)
+	testAccConfig := resourceTestAccConfigFunc(resourceId, name, AlicloudVpcVpcBasicDependence11277)
 	resource.Test(t, resource.TestCase{
 		PreCheck: func() {
-			testAccPreCheckWithRegions(t, true, []connectivity.Region{"cn-hangzhou"})
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
@@ -1485,25 +1484,29 @@ func TestAccAliCloudVpcVpc_basic9656(t *testing.T) {
 		Steps: []resource.TestStep{
 			{
 				Config: testAccConfig(map[string]interface{}{
-					"ipv4_cidr_mask":    "12",
-					"ipv4_ipam_pool_id": "${alicloud_vpc_ipam_ipam_pool_cidr.defaultIpamPoolCidr.ipam_pool_id}",
+					"ipv4_cidr_mask":    "24",
+					"ipv4_ipam_pool_id": "${alicloud_vpc_ipam_ipam_pool.defaultIpamPool.id}",
+					"ipv6_isp":          "BGP",
+					"ipv6_cidr_mask":    "56",
+					"ipv6_ipam_pool_id": "${alicloud_vpc_ipam_ipam_pool.defaultIpamIpv6Pool.id}",
 				}),
 				Check: resource.ComposeTestCheckFunc(
 					testAccCheck(map[string]string{
-						"ipv4_cidr_mask":    "12",
+						"ipv4_cidr_mask":    "24",
 						"ipv4_ipam_pool_id": CHECKSET,
+						"ipv6_isp":          "BGP",
+						"ipv6_cidr_mask":    "56",
+						"ipv6_ipam_pool_id": CHECKSET,
 					}),
 				),
 			},
 			{
 				Config: testAccConfig(map[string]interface{}{
-					"secondary_cidr_mask": "24",
-					"description":         "desc",
+					"vpc_name": name + "_update",
 				}),
 				Check: resource.ComposeTestCheckFunc(
 					testAccCheck(map[string]string{
-						"secondary_cidr_mask": "24",
-						"description":         "desc",
+						"vpc_name": name + "_update",
 					}),
 				),
 			},
@@ -1553,20 +1556,162 @@ func TestAccAliCloudVpcVpc_basic9656(t *testing.T) {
 				ResourceName:            resourceId,
 				ImportState:             true,
 				ImportStateVerify:       true,
-				ImportStateVerifyIgnore: []string{"dry_run", "ipv4_cidr_mask", "ipv4_ipam_pool_id", "ipv6_isp", "secondary_cidr_mask"},
+				ImportStateVerifyIgnore: []string{"dry_run", "ipv4_cidr_mask", "ipv4_ipam_pool_id", "ipv6_cidr_mask", "ipv6_ipam_pool_id", "ipv6_isp"},
 			},
 		},
 	})
 }
 
-var AlicloudVpcVpcMap9656 = map[string]string{
-	"router_id":   CHECKSET,
-	"status":      CHECKSET,
-	"create_time": CHECKSET,
-	"region_id":   CHECKSET,
+var AlicloudVpcVpcMap11277 = map[string]string{
+	"router_id":           CHECKSET,
+	"dhcp_options_set_id": CHECKSET,
+	"is_default":          CHECKSET,
+	"status":              CHECKSET,
+	"vswitch_ids.#":       CHECKSET,
+	"create_time":         CHECKSET,
+	"region_id":           CHECKSET,
 }
 
-func AlicloudVpcVpcBasicDependence9656(name string) string {
+func AlicloudVpcVpcBasicDependence11277(name string) string {
+	return fmt.Sprintf(`
+variable "name" {
+    default = "%s"
+}
+
+resource "alicloud_vpc_ipam_ipam" "defaultIpam" {
+  operating_region_list = ["cn-hangzhou"]
+}
+
+resource "alicloud_vpc_ipam_ipam_pool" "defaultIpamPool" {
+  ip_version     = "IPv4"
+  ipam_scope_id  = alicloud_vpc_ipam_ipam.defaultIpam.private_default_scope_id
+  pool_region_id = alicloud_vpc_ipam_ipam.defaultIpam.region_id
+}
+
+resource "alicloud_vpc_ipam_ipam_pool_cidr" "defaultIpamPoolCidr" {
+  cidr         = "10.0.0.0/8"
+  ipam_pool_id = alicloud_vpc_ipam_ipam_pool.defaultIpamPool.id
+}
+
+resource "alicloud_vpc_ipam_ipam_pool" "defaultIpamIpv6Pool" {
+  ipv6_isp       = "BGP"
+  ipam_pool_name = "Ipv6Pool"
+  ip_version     = "IPv6"
+  ipam_scope_id  = alicloud_vpc_ipam_ipam.defaultIpam.public_default_scope_id
+  pool_region_id = alicloud_vpc_ipam_ipam.defaultIpam.region_id
+}
+
+resource "alicloud_vpc_ipam_ipam_pool_cidr" "defaultIpv6IpamPoolCidr" {
+  netmask_length = "56"
+  ipam_pool_id   = alicloud_vpc_ipam_ipam_pool.defaultIpamIpv6Pool.id
+}
+
+
+`, name)
+}
+
+// Case 从IPAM地址池创建VPC及添加附加网段_NEW_线上版本 9801
+func TestAccAliCloudVpcVpc_basic9801(t *testing.T) {
+	var v map[string]interface{}
+	resourceId := "alicloud_vpc.default"
+	ra := resourceAttrInit(resourceId, AlicloudVpcVpcMap9801)
+	rc := resourceCheckInitWithDescribeMethod(resourceId, &v, func() interface{} {
+		return &VpcServiceV2{testAccProvider.Meta().(*connectivity.AliyunClient)}
+	}, "DescribeVpcVpc")
+	rac := resourceAttrCheckInit(rc, ra)
+	testAccCheck := rac.resourceAttrMapUpdateSet()
+	rand := acctest.RandIntRange(10000, 99999)
+	name := fmt.Sprintf("tfaccvpc%d", rand)
+	testAccConfig := resourceTestAccConfigFunc(resourceId, name, AlicloudVpcVpcBasicDependence9801)
+	resource.Test(t, resource.TestCase{
+		PreCheck: func() {
+			testAccPreCheck(t)
+		},
+		IDRefreshName: resourceId,
+		Providers:     testAccProviders,
+		CheckDestroy:  rac.checkResourceDestroy(),
+		Steps: []resource.TestStep{
+			{
+				Config: testAccConfig(map[string]interface{}{
+					"ipv4_cidr_mask":    "24",
+					"ipv4_ipam_pool_id": "${alicloud_vpc_ipam_ipam_pool.defaultIpamPool.id}",
+				}),
+				Check: resource.ComposeTestCheckFunc(
+					testAccCheck(map[string]string{
+						"ipv4_cidr_mask":    "24",
+						"ipv4_ipam_pool_id": CHECKSET,
+					}),
+				),
+			},
+			{
+				Config: testAccConfig(map[string]interface{}{}),
+				Check: resource.ComposeTestCheckFunc(
+					testAccCheck(map[string]string{}),
+				),
+			},
+			{
+				Config: testAccConfig(map[string]interface{}{
+					"tags": map[string]string{
+						"Created": "TF",
+						"For":     "Test",
+					},
+				}),
+				Check: resource.ComposeTestCheckFunc(
+					testAccCheck(map[string]string{
+						"tags.%":       "2",
+						"tags.Created": "TF",
+						"tags.For":     "Test",
+					}),
+				),
+			},
+			{
+				Config: testAccConfig(map[string]interface{}{
+					"tags": map[string]string{
+						"Created": "TF-update",
+						"For":     "Test-update",
+					},
+				}),
+				Check: resource.ComposeTestCheckFunc(
+					testAccCheck(map[string]string{
+						"tags.%":       "2",
+						"tags.Created": "TF-update",
+						"tags.For":     "Test-update",
+					}),
+				),
+			},
+			{
+				Config: testAccConfig(map[string]interface{}{
+					"tags": REMOVEKEY,
+				}),
+				Check: resource.ComposeTestCheckFunc(
+					testAccCheck(map[string]string{
+						"tags.%":       "0",
+						"tags.Created": REMOVEKEY,
+						"tags.For":     REMOVEKEY,
+					}),
+				),
+			},
+			{
+				ResourceName:            resourceId,
+				ImportState:             true,
+				ImportStateVerify:       true,
+				ImportStateVerifyIgnore: []string{"dry_run", "ipv4_cidr_mask", "ipv4_ipam_pool_id", "ipv6_cidr_mask", "ipv6_ipam_pool_id", "ipv6_isp"},
+			},
+		},
+	})
+}
+
+var AlicloudVpcVpcMap9801 = map[string]string{
+	"router_id":           CHECKSET,
+	"dhcp_options_set_id": CHECKSET,
+	"is_default":          CHECKSET,
+	"status":              CHECKSET,
+	"vswitch_ids.#":       CHECKSET,
+	"create_time":         CHECKSET,
+	"region_id":           CHECKSET,
+}
+
+func AlicloudVpcVpcBasicDependence9801(name string) string {
 	return fmt.Sprintf(`
 variable "name" {
     default = "%s"
@@ -1578,7 +1723,263 @@ resource "alicloud_vpc_ipam_ipam" "defaultIpam" {
 
 resource "alicloud_vpc_ipam_ipam_pool" "defaultIpamPool" {
   ipam_scope_id  = alicloud_vpc_ipam_ipam.defaultIpam.private_default_scope_id
-  pool_region_id = "cn-hangzhou"
+  pool_region_id = alicloud_vpc_ipam_ipam.defaultIpam.region_id
+}
+
+resource "alicloud_vpc_ipam_ipam_pool_cidr" "defaultIpamPoolCidr" {
+  cidr         = "10.0.0.0/8"
+  ipam_pool_id = alicloud_vpc_ipam_ipam_pool.defaultIpamPool.id
+}
+
+
+`, name)
+}
+
+// Case 全生命周期_切自动化_v3 3410
+func TestAccAliCloudVpcVpc_basic3410(t *testing.T) {
+	var v map[string]interface{}
+	resourceId := "alicloud_vpc.default"
+	ra := resourceAttrInit(resourceId, AlicloudVpcVpcMap3410)
+	rc := resourceCheckInitWithDescribeMethod(resourceId, &v, func() interface{} {
+		return &VpcServiceV2{testAccProvider.Meta().(*connectivity.AliyunClient)}
+	}, "DescribeVpcVpc")
+	rac := resourceAttrCheckInit(rc, ra)
+	testAccCheck := rac.resourceAttrMapUpdateSet()
+	rand := acctest.RandIntRange(10000, 99999)
+	name := fmt.Sprintf("tfaccvpc%d", rand)
+	testAccConfig := resourceTestAccConfigFunc(resourceId, name, AlicloudVpcVpcBasicDependence3410)
+	resource.Test(t, resource.TestCase{
+		PreCheck: func() {
+			testAccPreCheckWithRegions(t, true, []connectivity.Region{"cn-hangzhou"})
+			testAccPreCheck(t)
+		},
+		IDRefreshName: resourceId,
+		Providers:     testAccProviders,
+		CheckDestroy:  rac.checkResourceDestroy(),
+		Steps: []resource.TestStep{
+			{
+				Config: testAccConfig(map[string]interface{}{
+					"ipv6_isp":    "BGP",
+					"description": "test",
+					"dry_run":     "false",
+					"cidr_block":  "10.0.0.0/8",
+					"vpc_name":    name,
+				}),
+				Check: resource.ComposeTestCheckFunc(
+					testAccCheck(map[string]string{
+						"ipv6_isp":    "BGP",
+						"description": "test",
+						"dry_run":     "false",
+						"cidr_block":  "10.0.0.0/8",
+						"vpc_name":    name,
+					}),
+				),
+			},
+			{
+				Config: testAccConfig(map[string]interface{}{
+					"description": "test-update",
+					"cidr_block":  "172.16.0.0/12",
+					"vpc_name":    name + "_update",
+				}),
+				Check: resource.ComposeTestCheckFunc(
+					testAccCheck(map[string]string{
+						"description": "test-update",
+						"cidr_block":  "172.16.0.0/12",
+						"vpc_name":    name + "_update",
+					}),
+				),
+			},
+			{
+				Config: testAccConfig(map[string]interface{}{
+					"tags": map[string]string{
+						"Created": "TF",
+						"For":     "Test",
+					},
+				}),
+				Check: resource.ComposeTestCheckFunc(
+					testAccCheck(map[string]string{
+						"tags.%":       "2",
+						"tags.Created": "TF",
+						"tags.For":     "Test",
+					}),
+				),
+			},
+			{
+				Config: testAccConfig(map[string]interface{}{
+					"tags": map[string]string{
+						"Created": "TF-update",
+						"For":     "Test-update",
+					},
+				}),
+				Check: resource.ComposeTestCheckFunc(
+					testAccCheck(map[string]string{
+						"tags.%":       "2",
+						"tags.Created": "TF-update",
+						"tags.For":     "Test-update",
+					}),
+				),
+			},
+			{
+				Config: testAccConfig(map[string]interface{}{
+					"tags": REMOVEKEY,
+				}),
+				Check: resource.ComposeTestCheckFunc(
+					testAccCheck(map[string]string{
+						"tags.%":       "0",
+						"tags.Created": REMOVEKEY,
+						"tags.For":     REMOVEKEY,
+					}),
+				),
+			},
+			{
+				ResourceName:            resourceId,
+				ImportState:             true,
+				ImportStateVerify:       true,
+				ImportStateVerifyIgnore: []string{"dry_run", "ipv4_cidr_mask", "ipv4_ipam_pool_id", "ipv6_cidr_mask", "ipv6_ipam_pool_id", "ipv6_isp"},
+			},
+		},
+	})
+}
+
+var AlicloudVpcVpcMap3410 = map[string]string{
+	"router_id":           CHECKSET,
+	"dhcp_options_set_id": CHECKSET,
+	"is_default":          CHECKSET,
+	"status":              CHECKSET,
+	"vswitch_ids.#":       CHECKSET,
+	"create_time":         CHECKSET,
+	"region_id":           CHECKSET,
+}
+
+func AlicloudVpcVpcBasicDependence3410(name string) string {
+	return fmt.Sprintf(`
+variable "name" {
+    default = "%s"
+}
+
+
+`, name)
+}
+
+// Case 从IPAM地址池创建VPC及添加附加网段_NEW 9747
+func TestAccAliCloudVpcVpc_basic9747(t *testing.T) {
+	var v map[string]interface{}
+	resourceId := "alicloud_vpc.default"
+	ra := resourceAttrInit(resourceId, AlicloudVpcVpcMap9747)
+	rc := resourceCheckInitWithDescribeMethod(resourceId, &v, func() interface{} {
+		return &VpcServiceV2{testAccProvider.Meta().(*connectivity.AliyunClient)}
+	}, "DescribeVpcVpc")
+	rac := resourceAttrCheckInit(rc, ra)
+	testAccCheck := rac.resourceAttrMapUpdateSet()
+	rand := acctest.RandIntRange(10000, 99999)
+	name := fmt.Sprintf("tfaccvpc%d", rand)
+	testAccConfig := resourceTestAccConfigFunc(resourceId, name, AlicloudVpcVpcBasicDependence9747)
+	resource.Test(t, resource.TestCase{
+		PreCheck: func() {
+			testAccPreCheckWithRegions(t, true, []connectivity.Region{"cn-hangzhou"})
+			testAccPreCheck(t)
+		},
+		IDRefreshName: resourceId,
+		Providers:     testAccProviders,
+		CheckDestroy:  rac.checkResourceDestroy(),
+		Steps: []resource.TestStep{
+			{
+				Config: testAccConfig(map[string]interface{}{
+					"ipv4_cidr_mask":    "24",
+					"ipv4_ipam_pool_id": "${alicloud_vpc_ipam_ipam_pool.defaultIpamPool.id}",
+				}),
+				Check: resource.ComposeTestCheckFunc(
+					testAccCheck(map[string]string{
+						"ipv4_cidr_mask":    "24",
+						"ipv4_ipam_pool_id": CHECKSET,
+					}),
+				),
+			},
+			{
+				Config: testAccConfig(map[string]interface{}{
+					"description": "desc",
+				}),
+				Check: resource.ComposeTestCheckFunc(
+					testAccCheck(map[string]string{
+						"description": "desc",
+					}),
+				),
+			},
+			{
+				Config: testAccConfig(map[string]interface{}{
+					"tags": map[string]string{
+						"Created": "TF",
+						"For":     "Test",
+					},
+				}),
+				Check: resource.ComposeTestCheckFunc(
+					testAccCheck(map[string]string{
+						"tags.%":       "2",
+						"tags.Created": "TF",
+						"tags.For":     "Test",
+					}),
+				),
+			},
+			{
+				Config: testAccConfig(map[string]interface{}{
+					"tags": map[string]string{
+						"Created": "TF-update",
+						"For":     "Test-update",
+					},
+				}),
+				Check: resource.ComposeTestCheckFunc(
+					testAccCheck(map[string]string{
+						"tags.%":       "2",
+						"tags.Created": "TF-update",
+						"tags.For":     "Test-update",
+					}),
+				),
+			},
+			{
+				Config: testAccConfig(map[string]interface{}{
+					"tags": REMOVEKEY,
+				}),
+				Check: resource.ComposeTestCheckFunc(
+					testAccCheck(map[string]string{
+						"tags.%":       "0",
+						"tags.Created": REMOVEKEY,
+						"tags.For":     REMOVEKEY,
+					}),
+				),
+			},
+			{
+				ResourceName:            resourceId,
+				ImportState:             true,
+				ImportStateVerify:       true,
+				ImportStateVerifyIgnore: []string{"dry_run", "ipv4_cidr_mask", "ipv4_ipam_pool_id", "ipv6_cidr_mask", "ipv6_ipam_pool_id", "ipv6_isp"},
+			},
+		},
+	})
+}
+
+var AlicloudVpcVpcMap9747 = map[string]string{
+	"router_id":           CHECKSET,
+	"dhcp_options_set_id": CHECKSET,
+	"is_default":          CHECKSET,
+	"status":              CHECKSET,
+	"vswitch_ids.#":       CHECKSET,
+	"create_time":         CHECKSET,
+	"region_id":           CHECKSET,
+}
+
+func AlicloudVpcVpcBasicDependence9747(name string) string {
+	return fmt.Sprintf(`
+variable "name" {
+    default = "%s"
+}
+
+resource "alicloud_vpc_ipam_ipam" "defaultIpam" {
+  operating_region_list = ["cn-hangzhou"]
+}
+
+resource "alicloud_vpc_ipam_ipam_pool" "defaultIpamPool" {
+  ipam_scope_id  = alicloud_vpc_ipam_ipam.defaultIpam.private_default_scope_id
+  pool_region_id = alicloud_vpc_ipam_ipam.defaultIpam.region_id
 }
 
 resource "alicloud_vpc_ipam_ipam_pool_cidr" "defaultIpamPoolCidr" {

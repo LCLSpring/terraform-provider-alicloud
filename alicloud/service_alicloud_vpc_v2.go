@@ -755,17 +755,15 @@ func (s *VpcServiceV2) VpcPublicIpAddressPoolCidrBlockStateRefreshFunc(id string
 // DescribeVpcVswitch <<< Encapsulated get interface for Vpc Vswitch.
 
 func (s *VpcServiceV2) DescribeVpcVswitch(id string) (object map[string]interface{}, err error) {
-
 	client := s.client
 	var request map[string]interface{}
 	var response map[string]interface{}
 	var query map[string]interface{}
-	action := "DescribeVSwitchAttributes"
 	request = make(map[string]interface{})
 	query = make(map[string]interface{})
-
-	query["VSwitchId"] = id
+	request["VSwitchId"] = id
 	request["RegionId"] = client.RegionId
+	action := "DescribeVSwitchAttributes"
 
 	wait := incrementalWait(3*time.Second, 5*time.Second)
 	err = resource.Retry(1*time.Minute, func() *resource.RetryError {
@@ -778,35 +776,44 @@ func (s *VpcServiceV2) DescribeVpcVswitch(id string) (object map[string]interfac
 			}
 			return resource.NonRetryableError(err)
 		}
-		addDebug(action, response, request)
 		return nil
 	})
+	addDebug(action, response, request)
 	if err != nil {
-		if IsExpectedErrors(err, []string{}) {
-			return object, WrapErrorf(NotFoundErr("Vswitch", id), NotFoundMsg, ProviderERROR, fmt.Sprint(response["RequestId"]))
-		}
 		return object, WrapErrorf(err, DefaultErrorMsg, id, action, AlibabaCloudSdkGoERROR)
 	}
 
 	currentStatus := response["VSwitchId"]
-	if currentStatus == "" {
-		return object, WrapErrorf(NotFoundErr("Vswitch", id), NotFoundMsg, ProviderERROR, fmt.Sprint(response["RequestId"]))
+	if fmt.Sprint(currentStatus) == "" {
+		return object, WrapErrorf(NotFoundErr("Vswitch", id), NotFoundMsg, response)
 	}
 
 	return response, nil
 }
 
 func (s *VpcServiceV2) VpcVswitchStateRefreshFunc(id string, field string, failStates []string) resource.StateRefreshFunc {
+	return s.VpcVswitchStateRefreshFuncWithApi(id, field, failStates, s.DescribeVpcVswitch)
+}
+
+func (s *VpcServiceV2) VpcVswitchStateRefreshFuncWithApi(id string, field string, failStates []string, call func(id string) (map[string]interface{}, error)) resource.StateRefreshFunc {
 	return func() (interface{}, string, error) {
-		object, err := s.DescribeVpcVswitch(id)
+		object, err := call(id)
 		if err != nil {
 			if NotFoundError(err) {
 				return object, "", nil
 			}
 			return nil, "", WrapError(err)
 		}
+		v, err := jsonpath.Get(field, object)
+		currentStatus := fmt.Sprint(v)
 
-		currentStatus := fmt.Sprint(object[field])
+		if strings.HasPrefix(field, "#") {
+			v, _ := jsonpath.Get(strings.TrimPrefix(field, "#"), object)
+			if v != nil {
+				currentStatus = "#CHECKSET"
+			}
+		}
+
 		for _, failState := range failStates {
 			if currentStatus == failState {
 				return object, currentStatus, WrapError(Error(FailedToReachTargetStatus, currentStatus))
@@ -894,30 +901,22 @@ func (s *VpcServiceV2) DescribeVpcDescribeRouteTableList(id string) (object map[
 		return object, WrapErrorf(NotFoundErr("Vpc", id), NotFoundMsg, response)
 	}
 
-	result, _ := v.([]interface{})
-	for _, v := range result {
-		item := v.(map[string]interface{})
-		if fmt.Sprint(item["RouteTableType"]) != "System" {
-			continue
-		}
-		if fmt.Sprint(item["VpcId"]) != id {
-			continue
-		}
-		return item, nil
-	}
-	return object, WrapErrorf(NotFoundErr("Vpc", id), NotFoundMsg, response)
+	return v.([]interface{})[0].(map[string]interface{}), nil
 }
 
 func (s *VpcServiceV2) VpcVpcStateRefreshFunc(id string, field string, failStates []string) resource.StateRefreshFunc {
+	return s.VpcVpcStateRefreshFuncWithApi(id, field, failStates, s.DescribeVpcVpc)
+}
+
+func (s *VpcServiceV2) VpcVpcStateRefreshFuncWithApi(id string, field string, failStates []string, call func(id string) (map[string]interface{}, error)) resource.StateRefreshFunc {
 	return func() (interface{}, string, error) {
-		object, err := s.DescribeVpcVpc(id)
+		object, err := call(id)
 		if err != nil {
 			if NotFoundError(err) {
-				return nil, "", nil
+				return object, "", nil
 			}
 			return nil, "", WrapError(err)
 		}
-
 		v, err := jsonpath.Get(field, object)
 		currentStatus := fmt.Sprint(v)
 
@@ -2460,3 +2459,92 @@ func (s *VpcServiceV2) VpcRouteEntryStateRefreshFunc(id string, field string, fa
 }
 
 // DescribeVpcRouteEntry >>> Encapsulated.
+// DescribeVpcIpv6CidrBlock <<< Encapsulated get interface for Vpc Ipv6CidrBlock.
+
+func (s *VpcServiceV2) DescribeVpcIpv6CidrBlock(id string) (object map[string]interface{}, err error) {
+	client := s.client
+	var request map[string]interface{}
+	var response map[string]interface{}
+	var query map[string]interface{}
+	parts := strings.Split(id, "#")
+	if len(parts) != 2 {
+		err = WrapError(fmt.Errorf("invalid Resource Id %s. Expected parts' length %d, got %d", id, 2, len(parts)))
+		return nil, err
+	}
+	request = make(map[string]interface{})
+	query = make(map[string]interface{})
+	request["VpcId"] = parts[0]
+	request["RegionId"] = client.RegionId
+	action := "DescribeVpcAttribute"
+
+	wait := incrementalWait(3*time.Second, 5*time.Second)
+	err = resource.Retry(1*time.Minute, func() *resource.RetryError {
+		response, err = client.RpcPost("Vpc", "2016-04-28", action, query, request, true)
+
+		if err != nil {
+			if IsExpectedErrors(err, []string{"LastTokenProcessing", "OperationConflict", "SystemBusy", "ServiceUnavailable", "IncorrectStatus"}) || NeedRetry(err) {
+				wait()
+				return resource.RetryableError(err)
+			}
+			return resource.NonRetryableError(err)
+		}
+		return nil
+	})
+	addDebug(action, response, request)
+	if err != nil {
+		return object, WrapErrorf(err, DefaultErrorMsg, id, action, AlibabaCloudSdkGoERROR)
+	}
+
+	v, err := jsonpath.Get("$.Ipv6CidrBlocks.Ipv6CidrBlock[*]", response)
+	if err != nil {
+		return object, WrapErrorf(err, FailedGetAttributeMsg, id, "$.Ipv6CidrBlocks.Ipv6CidrBlock[*]", response)
+	}
+
+	if len(v.([]interface{})) == 0 {
+		return object, WrapErrorf(NotFoundErr("Ipv6CidrBlock", id), NotFoundMsg, response)
+	}
+
+	result, _ := v.([]interface{})
+	for _, v := range result {
+		item := v.(map[string]interface{})
+		if fmt.Sprint(item["Ipv6CidrBlock"]) != parts[1] {
+			continue
+		}
+		return item, nil
+	}
+	return object, WrapErrorf(NotFoundErr("Ipv6CidrBlock", id), NotFoundMsg, response)
+}
+
+func (s *VpcServiceV2) VpcIpv6CidrBlockStateRefreshFunc(id string, field string, failStates []string) resource.StateRefreshFunc {
+	return s.VpcIpv6CidrBlockStateRefreshFuncWithApi(id, field, failStates, s.DescribeVpcIpv6CidrBlock)
+}
+
+func (s *VpcServiceV2) VpcIpv6CidrBlockStateRefreshFuncWithApi(id string, field string, failStates []string, call func(id string) (map[string]interface{}, error)) resource.StateRefreshFunc {
+	return func() (interface{}, string, error) {
+		object, err := call(id)
+		if err != nil {
+			if NotFoundError(err) {
+				return object, "", nil
+			}
+			return nil, "", WrapError(err)
+		}
+		v, err := jsonpath.Get(field, object)
+		currentStatus := fmt.Sprint(v)
+
+		if strings.HasPrefix(field, "#") {
+			v, _ := jsonpath.Get(strings.TrimPrefix(field, "#"), object)
+			if v != nil {
+				currentStatus = "#CHECKSET"
+			}
+		}
+
+		for _, failState := range failStates {
+			if currentStatus == failState {
+				return object, currentStatus, WrapError(Error(FailedToReachTargetStatus, currentStatus))
+			}
+		}
+		return object, currentStatus, nil
+	}
+}
+
+// DescribeVpcIpv6CidrBlock >>> Encapsulated.

@@ -1119,21 +1119,22 @@ func TestUnitAlicloudVPCVSwitch(t *testing.T) {
 }
 
 // Test Vpc Vswitch. >>> Resource test cases, automatically generated.
-// Case 3078
-func TestAccAliCloudVpcVswitch_basic3078(t *testing.T) {
+// Case 全生命周期 1489
+func TestAccAliCloudVpcVswitch_basic1489(t *testing.T) {
 	var v map[string]interface{}
 	resourceId := "alicloud_vswitch.default"
-	ra := resourceAttrInit(resourceId, AlicloudVpcVswitchMap3078)
+	ra := resourceAttrInit(resourceId, AlicloudVpcVswitchMap1489)
 	rc := resourceCheckInitWithDescribeMethod(resourceId, &v, func() interface{} {
 		return &VpcServiceV2{testAccProvider.Meta().(*connectivity.AliyunClient)}
 	}, "DescribeVpcVswitch")
 	rac := resourceAttrCheckInit(rc, ra)
 	testAccCheck := rac.resourceAttrMapUpdateSet()
 	rand := acctest.RandIntRange(10000, 99999)
-	name := fmt.Sprintf("tf-testacc%svpcvswitch%d", defaultRegionToTest, rand)
-	testAccConfig := resourceTestAccConfigFunc(resourceId, name, AlicloudVpcVswitchBasicDependence3078)
+	name := fmt.Sprintf("tfaccvpc%d", rand)
+	testAccConfig := resourceTestAccConfigFunc(resourceId, name, AlicloudVpcVswitchBasicDependence1489)
 	resource.Test(t, resource.TestCase{
 		PreCheck: func() {
+			testAccPreCheckWithRegions(t, true, []connectivity.Region{"cn-hangzhou"})
 			testAccPreCheck(t)
 		},
 		IDRefreshName: resourceId,
@@ -1142,68 +1143,33 @@ func TestAccAliCloudVpcVswitch_basic3078(t *testing.T) {
 		Steps: []resource.TestStep{
 			{
 				Config: testAccConfig(map[string]interface{}{
-					"is_default":   "false",
-					"zone_id":      "${data.alicloud_zones.default.zones.0.id}",
-					"vpc_id":       "${alicloud_vpc.OeB4be.id}",
-					"cidr_block":   "172.16.0.0/24",
-					"vswitch_name": name,
+					"description":     "test",
+					"zone_id":         "cn-hangzhou-j",
+					"vpc_id":          "vpc-bp1vzgj2t30917m8tlfwd",
+					"cidr_block":      "10.50.0.0/24",
+					"vswitch_name":    name,
+					"ipv6_cidr_block": "12",
 				}),
 				Check: resource.ComposeTestCheckFunc(
 					testAccCheck(map[string]string{
-						"zone_id":      CHECKSET,
-						"vpc_id":       CHECKSET,
-						"cidr_block":   "172.16.0.0/24",
-						"vswitch_name": name,
+						"description":     "test",
+						"zone_id":         "cn-hangzhou-j",
+						"vpc_id":          "vpc-bp1vzgj2t30917m8tlfwd",
+						"cidr_block":      "10.50.0.0/24",
+						"vswitch_name":    name,
+						"ipv6_cidr_block": CHECKSET,
 					}),
 				),
 			},
 			{
 				Config: testAccConfig(map[string]interface{}{
-					"description": "test",
-				}),
-				Check: resource.ComposeTestCheckFunc(
-					testAccCheck(map[string]string{
-						"description": "test",
-					}),
-				),
-			},
-			{
-				Config: testAccConfig(map[string]interface{}{
+					"description":  "test-update",
 					"vswitch_name": name + "_update",
 				}),
 				Check: resource.ComposeTestCheckFunc(
 					testAccCheck(map[string]string{
+						"description":  "test-update",
 						"vswitch_name": name + "_update",
-					}),
-				),
-			},
-			{
-				Config: testAccConfig(map[string]interface{}{
-					"description": "test-update",
-				}),
-				Check: resource.ComposeTestCheckFunc(
-					testAccCheck(map[string]string{
-						"description": "test-update",
-					}),
-				),
-			},
-			{
-				Config: testAccConfig(map[string]interface{}{
-					"description":          "test",
-					"zone_id":              "${data.alicloud_zones.default.zones.0.id}",
-					"vpc_id":               "${alicloud_vpc.OeB4be.id}",
-					"cidr_block":           "172.16.0.0/24",
-					"vswitch_name":         name + "_update",
-					"ipv6_cidr_block_mask": "8",
-				}),
-				Check: resource.ComposeTestCheckFunc(
-					testAccCheck(map[string]string{
-						"description":          "test",
-						"zone_id":              CHECKSET,
-						"vpc_id":               CHECKSET,
-						"cidr_block":           "172.16.0.0/24",
-						"vswitch_name":         name + "_update",
-						"ipv6_cidr_block_mask": "8",
 					}),
 				),
 			},
@@ -1253,46 +1219,53 @@ func TestAccAliCloudVpcVswitch_basic3078(t *testing.T) {
 				ResourceName:            resourceId,
 				ImportState:             true,
 				ImportStateVerify:       true,
-				ImportStateVerifyIgnore: []string{"enable_ipv6", "is_default"},
+				ImportStateVerifyIgnore: []string{"enable_ipv6", "ipv6_cidr_block_mask", "vpc_ipv6_cidr_block"},
 			},
 		},
 	})
 }
 
-var AlicloudVpcVswitchMap3078 = map[string]string{
-	"status":      CHECKSET,
-	"create_time": CHECKSET,
+var AlicloudVpcVswitchMap1489 = map[string]string{
+	"is_default":                 CHECKSET,
+	"status":                     CHECKSET,
+	"route_table_id":             CHECKSET,
+	"network_acl_id":             CHECKSET,
+	"available_ip_address_count": CHECKSET,
+	"create_time":                CHECKSET,
 }
 
-func AlicloudVpcVswitchBasicDependence3078(name string) string {
+func AlicloudVpcVswitchBasicDependence1489(name string) string {
 	return fmt.Sprintf(`
 variable "name" {
     default = "%s"
 }
-resource "alicloud_vpc" "OeB4be" {
-  vpc_name    = var.name
+
+resource "alicloud_vpc" "defaultVpc" {
+  description = "rdk-test-acc"
+  dry_run     = false
+  vpc_name    = "rdk-test-acc"
   enable_ipv6 = true
-  cidr_block  = "172.16.0.0/12"
+  ipv6_isp    = "BGP"
+  cidr_block  = "10.0.0.0/8"
 }
-data "alicloud_zones" "default" {
-	available_resource_creation= "VSwitch"
-}
+
+
 `, name)
 }
 
-// Case 3078  twin
-func TestAccAliCloudVpcVswitch_basic3078_twin(t *testing.T) {
+// Case 全生命周期_资源依赖 2842
+func TestAccAliCloudVpcVswitch_basic2842(t *testing.T) {
 	var v map[string]interface{}
 	resourceId := "alicloud_vswitch.default"
-	ra := resourceAttrInit(resourceId, AlicloudVpcVswitchMap3078)
+	ra := resourceAttrInit(resourceId, AlicloudVpcVswitchMap2842)
 	rc := resourceCheckInitWithDescribeMethod(resourceId, &v, func() interface{} {
 		return &VpcServiceV2{testAccProvider.Meta().(*connectivity.AliyunClient)}
 	}, "DescribeVpcVswitch")
 	rac := resourceAttrCheckInit(rc, ra)
 	testAccCheck := rac.resourceAttrMapUpdateSet()
 	rand := acctest.RandIntRange(10000, 99999)
-	name := fmt.Sprintf("tf-testacc%svpcvswitch%d", defaultRegionToTest, rand)
-	testAccConfig := resourceTestAccConfigFunc(resourceId, name, AlicloudVpcVswitchBasicDependence3078)
+	name := fmt.Sprintf("tfaccvpc%d", rand)
+	testAccConfig := resourceTestAccConfigFunc(resourceId, name, AlicloudVpcVswitchBasicDependence2842)
 	resource.Test(t, resource.TestCase{
 		PreCheck: func() {
 			testAccPreCheck(t)
@@ -1303,13 +1276,36 @@ func TestAccAliCloudVpcVswitch_basic3078_twin(t *testing.T) {
 		Steps: []resource.TestStep{
 			{
 				Config: testAccConfig(map[string]interface{}{
-					"is_default":           "false",
-					"description":          "test-update",
-					"zone_id":              "${data.alicloud_zones.default.zones.0.id}",
-					"vpc_id":               "${alicloud_vpc.OeB4be.id}",
-					"cidr_block":           "172.16.0.0/24",
-					"vswitch_name":         name,
-					"ipv6_cidr_block_mask": "8",
+					"description":  "test",
+					"zone_id":      "cn-hangzhou-j",
+					"vpc_id":       "${alicloud_vpc.defaultVpc.id}",
+					"cidr_block":   "10.50.0.0/24",
+					"vswitch_name": name,
+				}),
+				Check: resource.ComposeTestCheckFunc(
+					testAccCheck(map[string]string{
+						"description":  "test",
+						"zone_id":      "cn-hangzhou-j",
+						"vpc_id":       CHECKSET,
+						"cidr_block":   "10.50.0.0/24",
+						"vswitch_name": name,
+					}),
+				),
+			},
+			{
+				Config: testAccConfig(map[string]interface{}{
+					"vswitch_name": name + "_update",
+					"enable_ipv6":  "false",
+				}),
+				Check: resource.ComposeTestCheckFunc(
+					testAccCheck(map[string]string{
+						"vswitch_name": name + "_update",
+						"enable_ipv6":  "false",
+					}),
+				),
+			},
+			{
+				Config: testAccConfig(map[string]interface{}{
 					"tags": map[string]string{
 						"Created": "TF",
 						"For":     "Test",
@@ -1317,15 +1313,36 @@ func TestAccAliCloudVpcVswitch_basic3078_twin(t *testing.T) {
 				}),
 				Check: resource.ComposeTestCheckFunc(
 					testAccCheck(map[string]string{
-						"description":          "test-update",
-						"zone_id":              CHECKSET,
-						"vpc_id":               CHECKSET,
-						"cidr_block":           "172.16.0.0/24",
-						"vswitch_name":         name,
-						"ipv6_cidr_block_mask": "8",
-						"tags.%":               "2",
-						"tags.Created":         "TF",
-						"tags.For":             "Test",
+						"tags.%":       "2",
+						"tags.Created": "TF",
+						"tags.For":     "Test",
+					}),
+				),
+			},
+			{
+				Config: testAccConfig(map[string]interface{}{
+					"tags": map[string]string{
+						"Created": "TF-update",
+						"For":     "Test-update",
+					},
+				}),
+				Check: resource.ComposeTestCheckFunc(
+					testAccCheck(map[string]string{
+						"tags.%":       "2",
+						"tags.Created": "TF-update",
+						"tags.For":     "Test-update",
+					}),
+				),
+			},
+			{
+				Config: testAccConfig(map[string]interface{}{
+					"tags": REMOVEKEY,
+				}),
+				Check: resource.ComposeTestCheckFunc(
+					testAccCheck(map[string]string{
+						"tags.%":       "0",
+						"tags.Created": REMOVEKEY,
+						"tags.For":     REMOVEKEY,
 					}),
 				),
 			},
@@ -1333,10 +1350,29 @@ func TestAccAliCloudVpcVswitch_basic3078_twin(t *testing.T) {
 				ResourceName:            resourceId,
 				ImportState:             true,
 				ImportStateVerify:       true,
-				ImportStateVerifyIgnore: []string{"enable_ipv6", "is_default"},
+				ImportStateVerifyIgnore: []string{"enable_ipv6", "ipv6_cidr_block_mask", "vpc_ipv6_cidr_block"},
 			},
 		},
 	})
+}
+
+var AlicloudVpcVswitchMap2842 = map[string]string{
+	"is_default":                 CHECKSET,
+	"status":                     CHECKSET,
+	"route_table_id":             CHECKSET,
+	"network_acl_id":             CHECKSET,
+	"available_ip_address_count": CHECKSET,
+	"create_time":                CHECKSET,
+}
+
+func AlicloudVpcVswitchBasicDependence2842(name string) string {
+	return fmt.Sprintf(`
+variable "name" {
+    default = "%s"
+}
+
+
+`, name)
 }
 
 // Test Vpc Vswitch. <<< Resource test cases, automatically generated.
