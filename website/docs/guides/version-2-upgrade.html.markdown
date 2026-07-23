@@ -103,7 +103,55 @@ output "cidr_block" {
 
 ## Resource: alicloud_cr_repo
 
--> **NOTE:** The Container Registry API (version `2016-06-07`) backing `alicloud_cr_repo` is no longer available. This resource is no longer functional and must be removed from your configuration.
+### domain_list Attribute Type Change
+
+The `domain_list` attribute has changed from a `TypeMap` to a `TypeList`. Update attribute references from map key syntax to list index syntax.
+
+Previous configuration:
+
+```terraform
+resource "alicloud_cr_repo" "example" {
+  namespace = "my-namespace"
+  name      = "my-repo"
+  summary   = "Chinese mainland China regions"
+  repo_type = "PUBLIC"
+}
+
+output "public_domain" {
+  value = alicloud_cr_repo.example.domain_list["public"]
+}
+
+output "internal_domain" {
+  value = alicloud_cr_repo.example.domain_list["internal"]
+}
+
+output "vpc_domain" {
+  value = alicloud_cr_repo.example.domain_list["vpc"]
+}
+```
+
+Updated configuration:
+
+```terraform
+resource "alicloud_cr_repo" "example" {
+  namespace = "my-namespace"
+  name      = "my-repo"
+  summary   = "Chinese mainland China regions"
+  repo_type = "PUBLIC"
+}
+
+output "public_domain" {
+  value = alicloud_cr_repo.example.domain_list[0].public
+}
+
+output "internal_domain" {
+  value = alicloud_cr_repo.example.domain_list[0].internal
+}
+
+output "vpc_domain" {
+  value = alicloud_cr_repo.example.domain_list[0].vpc
+}
+```
 
 ## Resource: alicloud_cs_edge_kubernetes
 
@@ -121,14 +169,6 @@ resource "alicloud_cs_edge_kubernetes" "example" {
     name    = "containerd"
     version = "1.5.13"
   }
-}
-
-output "runtime_name" {
-  value = alicloud_cs_edge_kubernetes.example.runtime["name"]
-}
-
-output "runtime_version" {
-  value = alicloud_cs_edge_kubernetes.example.runtime["version"]
 }
 
 output "cluster_cert" {
@@ -170,14 +210,6 @@ resource "alicloud_cs_edge_kubernetes" "example" {
     name    = "containerd"
     version = "1.5.13"
   }
-}
-
-output "runtime_name" {
-  value = alicloud_cs_edge_kubernetes.example.runtime[0].name
-}
-
-output "runtime_version" {
-  value = alicloud_cs_edge_kubernetes.example.runtime[0].version
 }
 
 output "cluster_cert" {
@@ -227,14 +259,6 @@ resource "alicloud_cs_kubernetes" "example" {
   }
 }
 
-output "runtime_name" {
-  value = alicloud_cs_kubernetes.example.runtime["name"]
-}
-
-output "runtime_version" {
-  value = alicloud_cs_kubernetes.example.runtime["version"]
-}
-
 output "cluster_cert" {
   value = alicloud_cs_kubernetes.example.certificate_authority["cluster_cert"]
 }
@@ -274,14 +298,6 @@ resource "alicloud_cs_kubernetes" "example" {
     name    = "containerd"
     version = "1.5.13"
   }
-}
-
-output "runtime_name" {
-  value = alicloud_cs_kubernetes.example.runtime[0].name
-}
-
-output "runtime_version" {
-  value = alicloud_cs_kubernetes.example.runtime[0].version
 }
 
 output "cluster_cert" {
@@ -393,7 +409,49 @@ output "service_domain" {
 
 ## Data Source: alicloud_cr_repos
 
--> **NOTE:** The Container Registry API (version `2016-06-07`) backing `alicloud_cr_repos` is no longer available. This data source is no longer functional and must be removed from your configuration.
+### repos.domain_list Attribute Type Change
+
+The `domain_list` attribute within `repos` has changed from a `TypeMap` to a `TypeList`. Update attribute references from map key syntax to list index syntax.
+
+Previous configuration:
+
+```terraform
+data "alicloud_cr_repos" "example" {
+  namespace = "my-namespace"
+}
+
+output "first_repo_public_domain" {
+  value = data.alicloud_cr_repos.example.repos[0].domain_list["public"]
+}
+
+output "first_repo_internal_domain" {
+  value = data.alicloud_cr_repos.example.repos[0].domain_list["internal"]
+}
+
+output "first_repo_vpc_domain" {
+  value = data.alicloud_cr_repos.example.repos[0].domain_list["vpc"]
+}
+```
+
+Updated configuration:
+
+```terraform
+data "alicloud_cr_repos" "example" {
+  namespace = "my-namespace"
+}
+
+output "first_repo_public_domain" {
+  value = data.alicloud_cr_repos.example.repos[0].domain_list[0].public
+}
+
+output "first_repo_internal_domain" {
+  value = data.alicloud_cr_repos.example.repos[0].domain_list[0].internal
+}
+
+output "first_repo_vpc_domain" {
+  value = data.alicloud_cr_repos.example.repos[0].domain_list[0].vpc
+}
+```
 
 ## Data Source: alicloud_cs_cluster_credential
 

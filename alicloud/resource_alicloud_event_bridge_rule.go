@@ -84,7 +84,6 @@ func resourceAliCloudEventBridgeRule() *schema.Resource {
 								"acs.sae",
 								"acs.sls",
 								"acs.sms",
-								"ApacheKafkaSelf",
 								"http",
 								"https",
 								"mysql"}, false),

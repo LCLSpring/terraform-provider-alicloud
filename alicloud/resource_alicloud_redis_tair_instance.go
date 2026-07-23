@@ -103,16 +103,6 @@ func resourceAliCloudRedisTairInstance() *schema.Resource {
 				Optional: true,
 				Computed: true,
 			},
-			"maintain_end_time": {
-				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
-			},
-			"maintain_start_time": {
-				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
-			},
 			"max_connections": {
 				Type:     schema.TypeInt,
 				Computed: true,
@@ -454,14 +444,6 @@ func resourceAliCloudRedisTairInstanceRead(d *schema.ResourceData, meta interfac
 		return WrapError(err)
 	}
 
-	// IsSupportTDE reflects whether the instance actually supports Transparent Data Encryption.
-	// It must be captured from the DescribeInstanceAttribute response before objectRaw gets
-	// reassigned by the subsequent describe calls below.
-	isSupportTDE := false
-	if v, ok := objectRaw["IsSupportTDE"].(bool); ok {
-		isSupportTDE = v
-	}
-
 	if objectRaw["ArchitectureType"] != nil {
 		d.Set("architecture_type", objectRaw["ArchitectureType"])
 	}
@@ -479,12 +461,6 @@ func resourceAliCloudRedisTairInstanceRead(d *schema.ResourceData, meta interfac
 	}
 	if objectRaw["InstanceType"] != nil {
 		d.Set("instance_type", objectRaw["InstanceType"])
-	}
-	if objectRaw["MaintainEndTime"] != nil {
-		d.Set("maintain_end_time", objectRaw["MaintainEndTime"])
-	}
-	if objectRaw["MaintainStartTime"] != nil {
-		d.Set("maintain_start_time", objectRaw["MaintainStartTime"])
 	}
 	if objectRaw["Connections"] != nil {
 		d.Set("max_connections", objectRaw["Connections"])
@@ -596,11 +572,9 @@ func resourceAliCloudRedisTairInstanceRead(d *schema.ResourceData, meta interfac
 		d.Set("security_group_id", objectRaw["SecurityGroupId"])
 	}
 
-	// Only query the TDE status when the instance actually supports it. Gating on the
-	// runtime IsSupportTDE flag (instead of a static instance_type/engine_version match)
-	// avoids the InstanceType.NotSupport 400 error that DescribeInstanceTDEStatus raises
-	// for instances that do not support TDE, which otherwise bubbles up as a fatal read error.
-	if isSupportTDE {
+	checkValue00 := d.Get("instance_type")
+	checkValue01 := d.Get("engine_version")
+	if (checkValue00 == "tair_rdb") && (InArray(fmt.Sprint(checkValue01), []string{"6.0", "7.0"})) {
 		objectRaw, err = redisServiceV2.DescribeTairInstanceDescribeInstanceTDEStatus(d.Id())
 		if err != nil && !NotFoundError(err) {
 			return WrapError(err)
@@ -1209,42 +1183,6 @@ func resourceAliCloudRedisTairInstanceUpdate(d *schema.ResourceData, meta interf
 				return WrapErrorf(err, IdMsg, d.Id())
 			}
 
-		}
-	}
-	update = false
-	action = "ModifyInstanceMaintainTime"
-	request = make(map[string]interface{})
-	query = make(map[string]interface{})
-	request["InstanceId"] = d.Id()
-	request["RegionId"] = client.RegionId
-	if d.HasChange("maintain_end_time") {
-		update = true
-	}
-	if v, ok := d.GetOk("maintain_end_time"); ok {
-		request["MaintainEndTime"] = v
-	}
-	if d.HasChange("maintain_start_time") {
-		update = true
-	}
-	if v, ok := d.GetOk("maintain_start_time"); ok {
-		request["MaintainStartTime"] = v
-	}
-	if update {
-		wait := incrementalWait(3*time.Second, 5*time.Second)
-		err = resource.Retry(d.Timeout(schema.TimeoutUpdate), func() *resource.RetryError {
-			response, err = client.RpcPost("R-kvstore", "2015-01-01", action, query, request, true)
-			if err != nil {
-				if NeedRetry(err) {
-					wait()
-					return resource.RetryableError(err)
-				}
-				return resource.NonRetryableError(err)
-			}
-			return nil
-		})
-		addDebug(action, response, request)
-		if err != nil {
-			return WrapErrorf(err, DefaultErrorMsg, d.Id(), action, AlibabaCloudSdkGoERROR)
 		}
 	}
 	if d.HasChange("tags") {
